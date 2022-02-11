@@ -1,5 +1,7 @@
 package com.revature.wedding_planner.web.servlets;
 
-public class UserServlet {
+import javax.servlet.http.HttpServlet;
+
+public class UserServlet extends HttpServlet {
 
 }
