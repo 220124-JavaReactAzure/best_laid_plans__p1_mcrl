@@ -1,3 +1,10 @@
+drop table if exists couple;
+drop table if exists vendor_regist;
+drop table if exists users;
+drop table if exists wedding;
+drop table if exists vendors;
+
+
 create table if not exists vendors(
 	vendor_id varchar primary key,
 	vendor_name varchar(40),
@@ -6,8 +13,6 @@ create table if not exists vendors(
 	vendor_availability_begin date,
 	vendor_availability_end date
 );
-
-
 
 create table if not exists wedding(
 	wedding_id varchar primary key,
@@ -51,7 +56,3 @@ create table if not exists couple(
     foreign key(partner_2_id) references users (user_id)
 );
 
-
-
-	foreign key(wedding_staff_id) references users (user_id),
-    foreign key(wedding_couple) references couple (couple_id)
