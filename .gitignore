@@ -1,4 +1,6 @@
+.metadata
+.classpath
+.project
 *.properties
-WeddingPlanner/.classpath
-WeddingPlanner/target/*.*
-
+.settings/
+WeddingPlanner/target/
