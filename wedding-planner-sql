@@ -1,0 +1,31 @@
+create table if not exists users(
+	user_id varchar primary key,
+	user_fname varchar(25),
+	user_lname varchar(25),
+	user_email varchar(25) UNIQUE,
+	user_username varchar(25) UNIQUE,
+	user_password varchar(25),
+	user_partner varchar(50),
+    user_type int --0 for guest, 1 for couple, 2 for staff
+
+);
+
+create table if not exists couple(
+    couple_id varchar primary key,
+    partner_1_id varchar,
+    partner_2_id varchar,
+    foreign key(partner_1_id) references users (user_id),
+    foreign key(partner_2_id) references users (user_id)
+);
+
+create table if not exists wedding(
+	wedding_id varchar primary key,
+	wedding_date date UNIQUE,
+	wedding_staff_id varchar, --foreign key, staff assigned to wedding
+	wedding_head_count int,
+	wedding_venue varchar(30),
+    wedding_couple varchar,
+	foreign key(wedding_staff_id) references users (user_id),
+    foreign key(wedding_couple) references couple (couple_id)
+);
+
