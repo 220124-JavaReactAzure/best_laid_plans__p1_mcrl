@@ -9,7 +9,7 @@ create table vendors(
 	vendor_id varchar(250) primary key,
 	vendor_name varchar(40),
 	vendor_type varchar(20),
-	vendor_cost double,
+	vendor_cost double precision,
 	vendor_availability_begin date,
 	vendor_availability_end date
 );
@@ -19,7 +19,8 @@ create table wedding(
 	wedding_date date UNIQUE NOT NULL,
 	wedding_head_count int,
     wedding_couple varchar(250),
-	wedding_budget double,
+	wedding_budget double precision,
+	wedding_venue varchar (250),
 	foreign key(wedding_venue) references vendors(vendor_id)
 );
 
@@ -28,12 +29,12 @@ create table users(
 	user_fname varchar(25),
 	user_lname varchar(25),
 	user_email varchar(25) UNIQUE,
-	user_phone_number int (10),
+	user_phone_number varchar (10),
 	user_username varchar(25) UNIQUE,
 	user_password varchar(25),
 	user_meal_choice int,
-	user_plus_one boolean,
-	user_is_attending boolean,
+	user_plus_one BIT,
+	user_is_attending BIT,
     user_type int, --0 for guest, 1 for couple, 2 for staff
 	wedding_id varchar(250),
 	foreign key(wedding_id) references wedding(wedding_id)
