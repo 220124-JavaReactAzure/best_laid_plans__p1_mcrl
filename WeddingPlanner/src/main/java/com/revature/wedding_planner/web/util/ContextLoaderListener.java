@@ -33,14 +33,19 @@ public class ContextLoaderListener implements ServletContextListener{
 		WeddingDAO weddingDAO = new WeddingDAO();
 		UserService userService = new UserService(userDAO);
 		WeddingService weddingService = new WeddingService(weddingDAO, userService);
+		//TODO add remaining services/daos
 		
 		WeddingServlet weddingServlet = new WeddingServlet(weddingService, mapper);
 		AuthServlet authServlet = new AuthServlet(userService, mapper);
+		//TODO initiate remaining servlets
 		
 		ServletContext context = sce.getServletContext();
 		context.addServlet("WeddingServlet", weddingServlet).addMapping("/weddings/*");
 		context.addServlet("AuthServlet", authServlet).addMapping("/auth");
+		//TODO add remaining servlets to the context
 		
+		
+		//TODO implement/update logging
 		logger.info("Application initiliazed!!! We do did it!~WOOO~");
 	}
 	

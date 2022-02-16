@@ -6,12 +6,21 @@ import com.revature.wedding_planner.models.User;
 public class UserService {
 
 	public UserService(UserDAO userDAO) {
-		// TODO Auto-generated constructor stub
+		
 	}
-
+	
 	public User authenticateUser(String username, String password) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
-
+	public boolean isValidUser () {
+		//TODO
+		
+		
+		
+		return false;
+	}
 }

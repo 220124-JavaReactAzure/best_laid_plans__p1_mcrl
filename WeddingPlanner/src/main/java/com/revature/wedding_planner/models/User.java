@@ -1,18 +1,20 @@
 package com.revature.wedding_planner.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable{
 	@Id
 	@Column(name="user_id")
 	private String id;
@@ -36,7 +38,11 @@ public class User {
 	private boolean attending;
 	@Column(name="user_type")
 	private int userType;
+	
+	//TODO figure out relational mapping between tables.
 	@Column(name="wedding_id")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "wedding_id")
 	private String weddingId;
 
 	public User() {
@@ -156,6 +162,29 @@ public class User {
 				+ phoneNumber + ", username=" + username + ", password=" + password + ", mealChoice=" + mealChoice
 				+ ", plusOne=" + plusOne + ", attending=" + attending + ", userType=" + userType + ", weddingId="
 				+ weddingId + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(attending, email, fname, id, lname, mealChoice, password, phoneNumber, plusOne, userType,
+				username, weddingId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(fname, other.fname)
+				&& Objects.equals(id, other.id) && Objects.equals(lname, other.lname)
+				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(password, other.password)
+				&& Objects.equals(phoneNumber, other.phoneNumber) && plusOne == other.plusOne
+				&& userType == other.userType && Objects.equals(username, other.username)
+				&& Objects.equals(weddingId, other.weddingId);
 	}
 
 	
