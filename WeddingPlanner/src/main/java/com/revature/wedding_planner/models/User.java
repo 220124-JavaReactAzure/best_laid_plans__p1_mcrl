@@ -26,9 +26,9 @@ public class User implements Serializable{
 	private String email;
 	@Column(name="user_phone_number")
 	private String phoneNumber;
-	@Column(name="user_username")
+	@Column(name="user_username", unique = true, nullable = false)
 	private String username;
-	@Column(name="user_password")
+	@Column(name="user_password", nullable = false)
 	private String password;
 	@Column(name="user_meal_choice")
 	private String mealChoice;
