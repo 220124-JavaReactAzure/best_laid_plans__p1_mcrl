@@ -27,7 +27,7 @@ public class User implements Serializable{
 	@Column(name="user_password", nullable = false)
 	private String password;
 	@Column(name="user_meal_choice")
-	private String mealChoice;
+	private int mealChoice;
 	@Column(name="user_plus_one")
 	private boolean plusOne;
 	@Column(name="user_is_attending")
@@ -96,11 +96,11 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public String getMealChoice() {
+	public int getMealChoice() {
 		return mealChoice;
 	}
 
-	public void setMealChoice(String mealChoice) {
+	public void setMealChoice(int mealChoice) {
 		this.mealChoice = mealChoice;
 	}
 
@@ -139,9 +139,8 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", username=" + username + ", password="
-				+ password + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
-				+ ", userType=" + userType + ", weddingId=" + weddingId + "]";
+		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
+				+ ", userType=" + userType + "]";
 	}
 
 	@Override
@@ -165,10 +164,5 @@ public class User implements Serializable{
 	}
 
 
-
-	
-	
-	
-	
 	
 }
