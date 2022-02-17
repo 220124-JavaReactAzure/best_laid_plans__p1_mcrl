@@ -68,4 +68,11 @@ public class UserService {
 	public void logout() {
 		//TODO or not to do?
 	}
+	
+	public User updateUser(User updatedUser) {
+		if (!userDAO.update(updatedUser)) {
+			throw new ResourcePersistenceException("Failure updating user.");
+		}
+		return updatedUser;
+	}
 }
