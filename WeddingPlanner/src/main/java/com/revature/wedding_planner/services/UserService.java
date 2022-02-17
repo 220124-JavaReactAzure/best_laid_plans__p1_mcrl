@@ -16,7 +16,7 @@ public class UserService {
 		this.userDAO = userDAO;
 	}
 
-	public User registerNewUser(User newUser) {
+	public boolean addUser(User newUser) {
 		if (!isValidUser(newUser)) {
 			throw new InvalidRequestException("Invalid user data provider");
 		}
@@ -42,7 +42,7 @@ public class UserService {
 			throw new ResourcePersistenceException("The user could not be persisted");
 		}
 
-		return persistedUser;
+		return true;
 	}
 
 	public User authenticateUser(String username, String password) {

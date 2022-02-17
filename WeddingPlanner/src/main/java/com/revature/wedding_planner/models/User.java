@@ -37,14 +37,21 @@ public class User implements Serializable{
 	
 	//TODO figure out relational mapping between tables.
 	@Column(name="wedding_id")
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_id")
 	private String weddingId;
 
 	public User() {
 		super();
 	}
 
+	
+	public User(String name, String email, String username, String password, int userType) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.userType = userType;
+	}
 	public User(String id, String name, String email, String username, String password, int userType) {
 		super();
 		this.id = id;

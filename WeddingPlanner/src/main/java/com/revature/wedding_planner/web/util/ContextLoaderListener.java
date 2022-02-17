@@ -17,6 +17,7 @@ import com.revature.wedding_planner.daos.UserDAO;
 import com.revature.wedding_planner.services.WeddingService;
 import com.revature.wedding_planner.services.UserService;
 import com.revature.wedding_planner.web.servlets.AuthServlet;
+import com.revature.wedding_planner.web.servlets.UserServlet;
 import com.revature.wedding_planner.web.servlets.WeddingServlet;
 
 @WebListener
@@ -36,11 +37,13 @@ public class ContextLoaderListener implements ServletContextListener{
 		//TODO add remaining services/daos
 		
 		WeddingServlet weddingServlet = new WeddingServlet(weddingService, mapper);
+		UserServlet userServlet = new UserServlet(userService, mapper);
 		AuthServlet authServlet = new AuthServlet(userService, mapper);
 		//TODO initiate remaining servlets
 		
 		ServletContext context = sce.getServletContext();
 		context.addServlet("WeddingServlet", weddingServlet).addMapping("/weddings/*");
+		context.addServlet("UserServlet", userServlet).addMapping("/users/*");
 		context.addServlet("AuthServlet", authServlet).addMapping("/auth");
 		//TODO add remaining servlets to the context
 		

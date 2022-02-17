@@ -5,3 +5,5 @@
 .settings/
 /WeddingPlanner/target/
 *.war
+*.class
+*.jar
