@@ -4,3 +4,4 @@
 *.properties
 .settings/
 /WeddingPlanner/target/
+*.war
