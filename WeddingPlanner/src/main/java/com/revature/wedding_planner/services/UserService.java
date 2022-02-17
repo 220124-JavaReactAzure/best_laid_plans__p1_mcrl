@@ -64,4 +64,8 @@ public class UserService {
 
 		return false;
 	}
+	
+	public void logout() {
+		//TODO or not to do?
+	}
 }

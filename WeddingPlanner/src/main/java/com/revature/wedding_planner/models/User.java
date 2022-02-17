@@ -18,14 +18,10 @@ public class User implements Serializable{
 	@Id
 	@Column(name="user_id")
 	private String id;
-	@Column(name="user_fname")
-	private String fname;
-	@Column(name="user_lname")
-	private String lname;
+	@Column(name="user_name")
+	private String name;
 	@Column(name="user_email", unique = true, nullable = false)
 	private String email;
-	@Column(name="user_phone_number")
-	private String phoneNumber;
 	@Column(name="user_username", unique = true, nullable = false)
 	private String username;
 	@Column(name="user_password", nullable = false)
@@ -49,11 +45,10 @@ public class User implements Serializable{
 		super();
 	}
 
-	public User(String id, String fname, String lname, String email, String username, String password, int userType) {
+	public User(String id, String name, String email, String username, String password, int userType) {
 		super();
 		this.id = id;
-		this.fname = fname;
-		this.lname = lname;
+		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -68,21 +63,14 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
 
 	public String getEmail() {
 		return email;
@@ -90,14 +78,6 @@ public class User implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getUsername() {
@@ -156,18 +136,17 @@ public class User implements Serializable{
 		this.weddingId = weddingId;
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", username=" + username + ", password=" + password + ", mealChoice=" + mealChoice
-				+ ", plusOne=" + plusOne + ", attending=" + attending + ", userType=" + userType + ", weddingId="
-				+ weddingId + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", username=" + username + ", password="
+				+ password + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
+				+ ", userType=" + userType + ", weddingId=" + weddingId + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(attending, email, fname, id, lname, mealChoice, password, phoneNumber, plusOne, userType,
-				username, weddingId);
+		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, weddingId);
 	}
 
 	@Override
@@ -179,13 +158,13 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(fname, other.fname)
-				&& Objects.equals(id, other.id) && Objects.equals(lname, other.lname)
-				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(password, other.password)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && plusOne == other.plusOne
-				&& userType == other.userType && Objects.equals(username, other.username)
-				&& Objects.equals(weddingId, other.weddingId);
+		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
+				&& Objects.equals(username, other.username) && Objects.equals(weddingId, other.weddingId);
 	}
+
+
 
 	
 	
