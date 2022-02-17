@@ -3,4 +3,4 @@
 *.project
 *.properties
 .settings/
-WeddingPlanner/target/
+/WeddingPlanner/target/

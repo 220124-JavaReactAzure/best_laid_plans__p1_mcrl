@@ -33,12 +33,12 @@ public class UserServlet extends HttpServlet {
 		if (path == null)
 			path = "";
 		switch (path) {
-		case "/ID":
+		case "/Username":
 			try {
-				String idParam = req.getParameter("userId");
+				String idParam = req.getParameter("username");
 				if (idParam == null) {
 					resp.setStatus(400);
-					writer.write("Please include the query ?userId=# in your url");
+					writer.write("Please include the query ?username=# in your url");
 					return;
 				}
 
