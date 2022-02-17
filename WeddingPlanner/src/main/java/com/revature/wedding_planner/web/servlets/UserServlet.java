@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.services.UserService;
 
-@WebServlet("/user")
+
 public class UserServlet extends HttpServlet {
 	private final UserService userService;
 	private final ObjectMapper mapper;
@@ -28,18 +27,6 @@ public class UserServlet extends HttpServlet {
 	}
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		super.destroy();
-	}
-
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
-	}
-
-	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter writer = resp.getWriter();
 		// Obtains everything after the /users
@@ -47,7 +34,7 @@ public class UserServlet extends HttpServlet {
 		if (path == null)
 			path = "";
 		switch (path) {
-		case "/Username":
+		case "/users":
 			try {
 				String idParam = req.getParameter("username");
 				if (idParam == null) {

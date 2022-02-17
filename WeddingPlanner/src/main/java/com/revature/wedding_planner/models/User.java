@@ -26,19 +26,19 @@ public class User implements Serializable{
 	private String username;
 	@Column(name="user_password", nullable = false)
 	private String password;
-	@Column(name="user_meal_choice")
-	private int mealChoice;
 	@Column(name="user_plus_one")
 	private boolean plusOne;
 	@Column(name="user_is_attending")
 	private boolean attending;
+	
+	//TODO figure out relational mapping between tables.
+	@Column(name="user_meal_choice")
+	private int mealChoice;
+	@Column(name="wedding_id")
+	private String weddingId;
 	@Column(name="user_type")
 	private int userType;
 	
-	//TODO figure out relational mapping between tables.
-	@Column(name="wedding_id")
-	private String weddingId;
-
 	public User() {
 		super();
 	}
@@ -61,6 +61,23 @@ public class User implements Serializable{
 		this.password = password;
 		this.userType = userType;
 	}
+	
+
+	public User(String id, String name, String email, String username, String password, int mealChoice, boolean plusOne,
+			boolean attending, int userType, String weddingId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.mealChoice = mealChoice;
+		this.plusOne = plusOne;
+		this.attending = attending;
+		this.userType = userType;
+		this.weddingId = weddingId;
+	}
+
 
 	public String getId() {
 		return id;
