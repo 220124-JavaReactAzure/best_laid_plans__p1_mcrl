@@ -18,8 +18,8 @@ public class UserService {
 
 	public boolean addUser(User newUser) {
 		//swap in isValidUser check once that method is implemented
-		if (newUser!=null) {
-			throw new InvalidRequestException("Invalid user data provider");
+		if (newUser==null) {
+			throw new InvalidRequestException("Invalid user data provided");
 		}
 
 		// logic that verifies the new users information isn't duplicated in the system
