@@ -36,7 +36,7 @@ public class UserDAO implements CrudDAO<User>{
 	public List<User> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
-			List<User> users = session.createQuery("FROM users").list();
+			List<User> users = session.createQuery("FROM User").list();
 			return users;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
