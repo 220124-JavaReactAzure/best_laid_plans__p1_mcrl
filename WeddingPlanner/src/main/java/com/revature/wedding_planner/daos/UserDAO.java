@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.models.Wedding;
-import com.revature.wedding_planner.util.HibernateUtil;
+import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public class UserDAO implements CrudDAO<User>{
 
