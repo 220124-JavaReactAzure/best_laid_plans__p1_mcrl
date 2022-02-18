@@ -10,7 +10,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.revature.wedding_planner.models.MealTypes;
 import com.revature.wedding_planner.models.User;
+import com.revature.wedding_planner.models.UserTypes;
 
 // TODO: Implement me
 public class HibernateUtil {
@@ -31,8 +33,8 @@ public class HibernateUtil {
 			configuration.addAnnotatedClass(User.class);
 //			configuration.addAnnotatedClass(Vendor.class);
 //			configuration.addAnnotatedClass(Wedding.class);
-//			configuration.addAnnotatedClass(MealType.class);
-//			configuration.addAnnotatedClass(UserType.class);
+//			configuration.addAnnotatedClass(MealTypes.class);
+//			configuration.addAnnotatedClass(UserTypes.class);
 //			configuration.addAnnotatedClass(VendorType.class);
 	
 			// ServiceRegistry

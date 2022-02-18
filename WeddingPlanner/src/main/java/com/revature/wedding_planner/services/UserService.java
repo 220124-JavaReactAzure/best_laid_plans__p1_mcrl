@@ -21,20 +21,20 @@ public class UserService {
 			throw new InvalidRequestException("Invalid user data provided");
 		}
 
-		// logic that verifies the new users information isn't duplicated in the system
-		boolean usernameAvailable = userDAO.findByUsername(newUser.getUsername()) == null;
-		boolean emailAvailable = userDAO.findByEmail(newUser.getEmail()) == null;
-
-		if (!usernameAvailable || !emailAvailable) {
-			if (emailAvailable) {
-				throw new ResourcePersistenceException("The provided username was already taken in the database");
-			} else if (usernameAvailable) {
-				throw new ResourcePersistenceException("The provided email was already taken in the database");
-			} else {
-				throw new ResourcePersistenceException(
-						"The provided username and email were already taken in the database");
-			}
-		}
+//		// logic that verifies the new users information isn't duplicated in the system
+//		boolean usernameAvailable = userDAO.findByUsername(newUser.getUsername()) == null;
+//		boolean emailAvailable = userDAO.findByEmail(newUser.getEmail()) == null;
+//
+//		if (!usernameAvailable || !emailAvailable) {
+//			if (emailAvailable) {
+//				throw new ResourcePersistenceException("The provided username was already taken in the database");
+//			} else if (usernameAvailable) {
+//				throw new ResourcePersistenceException("The provided email was already taken in the database");
+//			} else {
+//				throw new ResourcePersistenceException(
+//						"The provided username and email were already taken in the database");
+//			}
+//		}
 
 		User persistedUser = userDAO.create(newUser);
 

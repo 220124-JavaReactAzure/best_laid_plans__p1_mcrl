@@ -35,17 +35,17 @@ public class User implements Serializable{
 	private boolean attending;
 	
 	//TODO this might implement relational mapping between tables. may need to add nullable = false
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "meal_type_id")
-	public MealTypes mealChoice;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_id")
-	public Wedding wedding;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_type_id")
-	public UserTypes userType;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "meal_type_id")
+//	public MealTypes mealChoice;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_id")
+//	public Wedding wedding;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "user_type_id")
+//	public UserTypes userType;
 	
 	public User() {
 		super();
@@ -64,7 +64,7 @@ public class User implements Serializable{
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.userType = userType;
+//		this.userType = userType;
 	}
 	public User(String id, String name, String email, String username, String password, UserTypes userType) {
 		super();
@@ -73,7 +73,7 @@ public class User implements Serializable{
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.userType = userType;
+//		this.userType = userType;
 	}
 	
 
@@ -85,11 +85,11 @@ public class User implements Serializable{
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.mealChoice = mealChoice;
+//		this.mealChoice = mealChoice;
 		this.plusOne = plusOne;
 		this.attending = attending;
-		this.userType = userType;
-		this.wedding = wedding;
+//		this.userType = userType;
+//		this.wedding = wedding;
 	}
 
 
@@ -134,13 +134,13 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public MealTypes getMealChoice() {
-		return mealChoice;
-	}
-
-	public void setMealChoice(MealTypes mealChoice) {
-		this.mealChoice = mealChoice;
-	}
+//	public MealTypes getMealChoice() {
+//		return mealChoice;
+//	}
+//
+//	public void setMealChoice(MealTypes mealChoice) {
+//		this.mealChoice = mealChoice;
+//	}
 
 	public boolean isPlusOne() {
 		return plusOne;
@@ -158,48 +158,48 @@ public class User implements Serializable{
 		this.attending = attending;
 	}
 
-	public UserTypes getUserType() {
-		return userType;
-	}
+//	public UserTypes getUserType() {
+//		return userType;
+//	}
+//
+//	public void setUserType(UserTypes userType) {
+//		this.userType = userType;
+//	}
+//
+//	public Wedding getWeddingId() {
+//		return wedding;
+//	}
+//
+//	public void setWedding(Wedding wedding) {
+//		this.wedding = wedding;
+//	}
 
-	public void setUserType(UserTypes userType) {
-		this.userType = userType;
-	}
 
-	public Wedding getWeddingId() {
-		return wedding;
-	}
-
-	public void setWedding(Wedding wedding) {
-		this.wedding = wedding;
-	}
-
-
-	@Override
-	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
-				+ ", userType=" + userType + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
-				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
-	}
+//	@Override
+//	public String toString() {
+//		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
+//				+ ", userType=" + userType + "]";
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		User other = (User) obj;
+//		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+//				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
+//				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
+//				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
+//	}
 
 
 	

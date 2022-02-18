@@ -151,7 +151,6 @@ public class UserServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		try {
 			User newUser = mapper.readValue(req.getInputStream(), User.class);
-			resp.getWriter().write(newUser.toString());
 			boolean wasReg = userService.addUser(newUser);
 			if (wasReg) {
 				resp.setStatus(201);
