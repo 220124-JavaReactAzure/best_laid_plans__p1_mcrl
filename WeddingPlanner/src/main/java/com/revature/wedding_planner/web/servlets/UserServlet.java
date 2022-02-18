@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.services.UserService;
 
-
 public class UserServlet extends HttpServlet {
 	private final UserService userService;
 	private final ObjectMapper mapper;
@@ -34,7 +33,7 @@ public class UserServlet extends HttpServlet {
 		if (path == null)
 			path = "";
 		switch (path) {
-		case "/users":
+		case "/user":
 			try {
 				String idParam = req.getParameter("username");
 				if (idParam == null) {
@@ -57,6 +56,87 @@ public class UserServlet extends HttpServlet {
 				resp.setStatus(400);
 			}
 			break;
+		//TODO
+		case "/attendees":
+//			try {
+//				String idParam = req.getParameter("username");
+//				if (idParam == null) {
+//					resp.setStatus(400);
+//					writer.write("Please include the query ?username=# in your url");
+//					return;
+//				}
+//
+//				String userId = idParam;
+//
+//				User user = userService.getUserByID(userId);
+//				if (user == null) {
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(user);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+
+			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			resp.setStatus(200);
+			break;
+		//TODO
+		case "/betrothed":
+//			try {
+//				String idParam = req.getParameter("username");
+//				if (idParam == null) {
+//					resp.setStatus(400);
+//					writer.write("Please include the query ?username=# in your url");
+//					return;
+//				}
+//
+//				String userId = idParam;
+//
+//				User user = userService.getUserByID(userId);
+//				if (user == null) {
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(user);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+
+			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			resp.setStatus(200);
+			break;
+		//TODO
+		case "/staff":
+//			try {
+//				String idParam = req.getParameter("username");
+//				if (idParam == null) {
+//					resp.setStatus(400);
+//					writer.write("Please include the query ?username=# in your url");
+//					return;
+//				}
+//
+//				String userId = idParam;
+//
+//				User user = userService.getUserByID(userId);
+//				if (user == null) {
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(user);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+
+			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			resp.setStatus(200);
+			break;
 		default:
 			List<User> users = userService.getAllUsers();
 			String payload = mapper.writeValueAsString(users);
@@ -65,14 +145,15 @@ public class UserServlet extends HttpServlet {
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
 		try {
 			User newUser = mapper.readValue(req.getInputStream(), User.class);
+			resp.getWriter().write(newUser.toString());
 			boolean wasReg = userService.addUser(newUser);
-			if(wasReg) {
+			if (wasReg) {
 				resp.setStatus(201);
 			} else {
 				resp.setStatus(500);
@@ -88,13 +169,13 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			User updatedUser = mapper.readValue(req.getInputStream(), User.class);
 			userService.updateUser(updatedUser);
-			resp.setStatus(204);	
+			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
 			resp.getWriter().write("JSON threw exception");
@@ -105,7 +186,7 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

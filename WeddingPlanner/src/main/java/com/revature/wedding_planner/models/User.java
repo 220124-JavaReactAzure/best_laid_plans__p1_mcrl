@@ -44,7 +44,7 @@ public class User implements Serializable{
 	public Wedding wedding;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_type_id", nullable = false)
+	@JoinColumn(name = "user_type_id")
 	public UserTypes userType;
 	
 	public User() {

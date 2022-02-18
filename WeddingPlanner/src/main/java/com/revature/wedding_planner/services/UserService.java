@@ -17,7 +17,8 @@ public class UserService {
 	}
 
 	public boolean addUser(User newUser) {
-		if (!isValidUser(newUser)) {
+		//swap in isValidUser check once that method is implemented
+		if (newUser!=null) {
 			throw new InvalidRequestException("Invalid user data provider");
 		}
 
