@@ -29,6 +29,11 @@ public class HibernateUtil {
 			configuration.setProperties(props);
 			// ONE ADDITIONAL STEP I NEED TO INCLUDE
 			configuration.addAnnotatedClass(User.class);
+//			configuration.addAnnotatedClass(Vendor.class);
+//			configuration.addAnnotatedClass(Wedding.class);
+//			configuration.addAnnotatedClass(MealType.class);
+//			configuration.addAnnotatedClass(UserType.class);
+//			configuration.addAnnotatedClass(VendorType.class);
 	
 			// ServiceRegistry
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();

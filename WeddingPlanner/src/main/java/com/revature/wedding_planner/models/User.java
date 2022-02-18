@@ -6,9 +6,12 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User implements Serializable{
 	@Id
-	@Column(name="user_id")
+	@Column(name="user_id", unique = true, nullable = false)
 	private String id;
 	@Column(name="user_name")
 	private String name;
@@ -31,12 +34,17 @@ public class User implements Serializable{
 	@Column(name="user_is_attending")
 	private boolean attending;
 	
-	//TODO figure out relational mapping between tables.
-	@Column(name="user_meal_choice")
+	//TODO this might implement relational mapping between tables.
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "meal_type_id")
 	private int mealChoice;
-	@Column(name="wedding_id")
-	private String weddingId;
-	@Column(name="user_type")
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "wedding_id")
+	public Wedding wedding;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_type_id")
 	private int userType;
 	
 	public User() {
@@ -64,7 +72,7 @@ public class User implements Serializable{
 	
 
 	public User(String id, String name, String email, String username, String password, int mealChoice, boolean plusOne,
-			boolean attending, int userType, String weddingId) {
+			boolean attending, int userType, Wedding wedding) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,7 +83,7 @@ public class User implements Serializable{
 		this.plusOne = plusOne;
 		this.attending = attending;
 		this.userType = userType;
-		this.weddingId = weddingId;
+		this.wedding = wedding;
 	}
 
 
@@ -152,12 +160,12 @@ public class User implements Serializable{
 		this.userType = userType;
 	}
 
-	public String getWeddingId() {
-		return weddingId;
+	public Wedding getWeddingId() {
+		return wedding;
 	}
 
-	public void setWeddingId(String weddingId) {
-		this.weddingId = weddingId;
+	public void setWedding(Wedding wedding) {
+		this.wedding = wedding;
 	}
 
 
@@ -169,7 +177,7 @@ public class User implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, weddingId);
+		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
 	}
 
 	@Override
@@ -184,7 +192,7 @@ public class User implements Serializable{
 		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
 				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
-				&& Objects.equals(username, other.username) && Objects.equals(weddingId, other.weddingId);
+				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
 	}
 
 
