@@ -41,8 +41,8 @@ public class UserServlet extends HttpServlet {
 					writer.write("Please include the query ?username=# in your url");
 					return;
 				}
-
-				String userId = idParam;
+				//changed to int type to support change to serial generated int id type
+				int userId = Integer.parseInt(idParam);
 
 				User user = userService.getUserByID(userId);
 				if (user == null) {

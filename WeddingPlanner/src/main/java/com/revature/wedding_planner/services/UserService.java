@@ -84,7 +84,7 @@ public class UserService {
 		return updatedUser;
 	}
 
-	public User getUserByID(String userId) {
+	public User getUserByID(int userId) {
 
 		User foundUser = userDAO.findById(userId);
 

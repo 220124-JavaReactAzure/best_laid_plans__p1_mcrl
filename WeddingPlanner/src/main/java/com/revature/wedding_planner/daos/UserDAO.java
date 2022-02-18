@@ -19,7 +19,7 @@ public class UserDAO implements CrudDAO<User>{
 		try {
 			Session session = HibernateUtil.getSession();			
 			//assign unique user id
-			newUser.setId(UUID.randomUUID().toString());
+			//newUser.setId(UUID.randomUUID().toString());
 			
 			session.save(newUser);
 			return newUser;
@@ -51,7 +51,21 @@ public class UserDAO implements CrudDAO<User>{
 	public User findById(String id) {
 		try {
 			Session session = HibernateUtil.getSession();
-			User foundUser = session.get(User.class, id);
+			User foundUser = session.get(User.class, id); 
+			return foundUser;
+		} catch (HibernateException | IOException e) {
+			//TODO implement logging
+			e.printStackTrace();
+			return null;
+		} finally {
+			HibernateUtil.closeSession();
+		}
+	}
+	//added int overload to test with serial generated int id type
+	public User findById(int id) {
+		try {
+			Session session = HibernateUtil.getSession();
+			User foundUser = session.get(User.class, id); 
 			return foundUser;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -82,6 +96,23 @@ public class UserDAO implements CrudDAO<User>{
 
 	@Override
 	public boolean delete(String id) {
+		try {
+			Session session = HibernateUtil.getSession();
+			User deletedUser = this.findById(id);
+			session.delete(deletedUser);
+			return true;
+		} catch (HibernateException | IOException e) {
+			//TODO implement logging
+			e.printStackTrace();
+			return false;
+		} finally {
+			HibernateUtil.closeSession();
+		}
+	}
+	
+	
+	//added int overload to test with serial generated int id type
+	public boolean delete(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
 			User deletedUser = this.findById(id);

@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,27 +16,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="users")
-public class User implements Serializable{
+@Table(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class User {
 	@Id
-	@Column(name="user_id", unique = true, nullable = false)
-	private String id;
-	@Column(name="user_name")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", unique = true, nullable = false)
+	private int id;
+	@Column(name = "user_name")
 	private String name;
-	@Column(name="user_email", unique = true, nullable = false)
+	@Column(name = "user_email", unique = true, nullable = false)
 	private String email;
-	@Column(name="user_username", unique = true, nullable = false)
+	@Column(name = "user_username", unique = true, nullable = false)
 	private String username;
-	@Column(name="user_password", nullable = false)
+	@Column(name = "user_password", nullable = false)
 	private String password;
-	@Column(name="user_plus_one")
+	@Column(name = "user_plus_one")
 	private boolean plusOne;
-	@Column(name="user_is_attending")
+	@Column(name = "user_is_attending")
 	private boolean attending;
-	
-	//TODO this might implement relational mapping between tables. may need to add nullable = false
+
+	// TODO this might implement relational mapping between tables. may need to add
+	// nullable = false
 //	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "meal_type_id")
 //	public MealTypes mealChoice;
@@ -46,7 +55,7 @@ public class User implements Serializable{
 //	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "user_type_id")
 //	public UserTypes userType;
-	
+
 	public User() {
 		super();
 	}
@@ -58,6 +67,7 @@ public class User implements Serializable{
 		this.username = username;
 		this.password = password;
 	}
+
 	public User(String name, String email, String username, String password, UserTypes userType) {
 		super();
 		this.name = name;
@@ -66,7 +76,8 @@ public class User implements Serializable{
 		this.password = password;
 //		this.userType = userType;
 	}
-	public User(String id, String name, String email, String username, String password, UserTypes userType) {
+
+	public User(int id, String name, String email, String username, String password, UserTypes userType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,10 +86,9 @@ public class User implements Serializable{
 		this.password = password;
 //		this.userType = userType;
 	}
-	
 
-	public User(String id, String name, String email, String username, String password, MealTypes mealChoice, boolean plusOne,
-			boolean attending, UserTypes userType, Wedding wedding) {
+	public User(int id, String name, String email, String username, String password, MealTypes mealChoice,
+			boolean plusOne, boolean attending, UserTypes userType, Wedding wedding) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -92,12 +102,11 @@ public class User implements Serializable{
 //		this.wedding = wedding;
 	}
 
-
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -108,7 +117,6 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -174,7 +182,6 @@ public class User implements Serializable{
 //		this.wedding = wedding;
 //	}
 
-
 //	@Override
 //	public String toString() {
 //		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
@@ -201,6 +208,4 @@ public class User implements Serializable{
 //				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
 //	}
 
-
-	
 }
