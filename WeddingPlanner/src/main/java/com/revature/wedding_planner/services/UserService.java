@@ -17,8 +17,7 @@ public class UserService {
 	}
 
 	public boolean addUser(User newUser) {
-		//swap in isValidUser check once that method is implemented
-		if (newUser==null) {
+		if (!isValidUser(newUser)) {
 			throw new InvalidRequestException("Invalid user data provided");
 		}
 
@@ -68,7 +67,9 @@ public class UserService {
 
 	public boolean isValidUser(User user) {
 		// TODO check if each field is valid depending on the user type
-
+		if (user != null) {
+			return true;
+		}
 		return false;
 	}
 
