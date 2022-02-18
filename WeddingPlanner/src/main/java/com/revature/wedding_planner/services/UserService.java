@@ -102,4 +102,8 @@ public class UserService {
 			return allUsers;
 		}
 	}
+	
+	public void deleteUser(User user) {
+		userDAO.delete(user.getId());
+	}
 }

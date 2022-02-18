@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.wedding_planner.models.User;
+import com.revature.wedding_planner.models.Wedding;
 import com.revature.wedding_planner.util.HibernateUtil;
 
 public class UserDAO implements CrudDAO<User>{
@@ -124,4 +125,19 @@ public class UserDAO implements CrudDAO<User>{
 		}
 	}
 
+//	public User findByWedding(Wedding wedding) {
+//		try {
+//			Session session = HibernateUtil.getSession();
+//			User foundUser = session.get(User.class, wedding);
+//			return foundUser;
+//		} catch (HibernateException | IOException e) {
+//			//TODO implement logging
+//			e.printStackTrace();
+//			return null;
+//		} finally {
+//			HibernateUtil.closeSession();
+//		}
+//	}
+
 }
+

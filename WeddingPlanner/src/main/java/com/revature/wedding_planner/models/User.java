@@ -34,25 +34,31 @@ public class User implements Serializable{
 	@Column(name="user_is_attending")
 	private boolean attending;
 	
-	//TODO this might implement relational mapping between tables.
+	//TODO this might implement relational mapping between tables. may need to add nullable = false
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "meal_type_id")
-	private int mealChoice;
+	public MealTypes mealChoice;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_id")
 	public Wedding wedding;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_type_id")
-	private int userType;
+	@JoinColumn(name = "user_type_id", nullable = false)
+	public UserTypes userType;
 	
 	public User() {
 		super();
 	}
 
-	
-	public User(String name, String email, String username, String password, int userType) {
+	public User(String name, String email, String username, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+	public User(String name, String email, String username, String password, UserTypes userType) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -60,7 +66,7 @@ public class User implements Serializable{
 		this.password = password;
 		this.userType = userType;
 	}
-	public User(String id, String name, String email, String username, String password, int userType) {
+	public User(String id, String name, String email, String username, String password, UserTypes userType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,8 +77,8 @@ public class User implements Serializable{
 	}
 	
 
-	public User(String id, String name, String email, String username, String password, int mealChoice, boolean plusOne,
-			boolean attending, int userType, Wedding wedding) {
+	public User(String id, String name, String email, String username, String password, MealTypes mealChoice, boolean plusOne,
+			boolean attending, UserTypes userType, Wedding wedding) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -128,11 +134,11 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public int getMealChoice() {
+	public MealTypes getMealChoice() {
 		return mealChoice;
 	}
 
-	public void setMealChoice(int mealChoice) {
+	public void setMealChoice(MealTypes mealChoice) {
 		this.mealChoice = mealChoice;
 	}
 
@@ -152,11 +158,11 @@ public class User implements Serializable{
 		this.attending = attending;
 	}
 
-	public int getUserType() {
+	public UserTypes getUserType() {
 		return userType;
 	}
 
-	public void setUserType(int userType) {
+	public void setUserType(UserTypes userType) {
 		this.userType = userType;
 	}
 
