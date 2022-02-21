@@ -2,6 +2,9 @@ package com.revature.wedding_planner.daos;
 
 import java.util.List;
 import java.util.UUID;
+
+import javax.persistence.Query;
+
 import java.io.IOException;
 
 import org.hibernate.HibernateException;
@@ -98,8 +101,10 @@ public class UserDAO implements CrudDAO<User>{
 	public boolean delete(String id) {
 		try {
 			Session session = HibernateUtil.getSession();
+			Transaction transaction = session.beginTransaction();
 			User deletedUser = this.findById(id);
 			session.delete(deletedUser);
+			transaction.commit();
 			return true;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -115,8 +120,10 @@ public class UserDAO implements CrudDAO<User>{
 	public boolean delete(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
+			Transaction transaction = session.beginTransaction();
 			User deletedUser = this.findById(id);
 			session.delete(deletedUser);
+			transaction.commit();
 			return true;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -131,7 +138,11 @@ public class UserDAO implements CrudDAO<User>{
 	public User findByUsername(String username) {
 		try {
 			Session session = HibernateUtil.getSession();
-			User foundUser = session.get(User.class, username);
+			Transaction transaction = session.beginTransaction();
+			Query query = session.createQuery("SELECT FROM User WHERE User.username = :username ");
+			query.setParameter("username", username);
+			User foundUser = (User) query.getSingleResult();
+			transaction.commit();
 			return foundUser;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -145,7 +156,11 @@ public class UserDAO implements CrudDAO<User>{
 	public User findByEmail(String email) {
 		try {
 			Session session = HibernateUtil.getSession();
-			User foundUser = session.get(User.class, email);
+			Transaction transaction = session.beginTransaction();
+			Query query = session.createQuery("SELECT FROM User WHERE User.email = :email ");
+			query.setParameter("email", email);
+			User foundUser = (User) query.getSingleResult();
+			transaction.commit();
 			return foundUser;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
