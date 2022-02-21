@@ -6,82 +6,118 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="users")
-public class User implements Serializable{
+@Table(name = "users")
+//TODO check if generator can be omitted for non-serial id types
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class User {
 	@Id
-	@Column(name="user_id")
-	private String id;
-	@Column(name="user_fname")
-	private String fname;
-	@Column(name="user_lname")
-	private String lname;
-	@Column(name="user_email", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", unique = true, nullable = false)
+	private int id;
+	@Column(name = "user_name")
+	private String name;
+	@Column(name = "user_email", unique = true, nullable = false)
 	private String email;
-	@Column(name="user_phone_number")
-	private String phoneNumber;
-	@Column(name="user_username", unique = true, nullable = false)
+	@Column(name = "user_username", unique = true, nullable = false)
 	private String username;
-	@Column(name="user_password", nullable = false)
+	@Column(name = "user_password", nullable = false)
 	private String password;
-	@Column(name="user_meal_choice")
-	private String mealChoice;
-	@Column(name="user_plus_one")
+	@Column(name = "user_plus_one")
 	private boolean plusOne;
-	@Column(name="user_is_attending")
+	@Column(name = "user_is_attending")
 	private boolean attending;
-	@Column(name="user_type")
-	private int userType;
+
+	// TODO this might implement relational mapping between tables. may need to add
+	// nullable = false
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "meal_type_id")
+	@JsonIgnoreProperties(value= {"users", "id"})
+	public MealTypes mealChoice;
 	
-	//TODO figure out relational mapping between tables.
-	@Column(name="wedding_id")
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_id")
-	private String weddingId;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_id")
+//	public Wedding wedding;
+	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "user_type_id")
+//	public UserTypes userType;
 
 	public User() {
 		super();
 	}
 
-	public User(String id, String fname, String lname, String email, String username, String password, int userType) {
+	public User(String name, String email, String username, String password) {
 		super();
-		this.id = id;
-		this.fname = fname;
-		this.lname = lname;
+		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.userType = userType;
 	}
 
-	public String getId() {
+	public User(String name, String email, String username, String password, UserTypes userType) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+//		this.userType = userType;
+	}
+
+	public User(int id, String name, String email, String username, String password, UserTypes userType) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+//		this.userType = userType;
+	}
+
+	public User(int id, String name, String email, String username, String password, MealTypes mealChoice,
+			boolean plusOne, boolean attending, UserTypes userType, Wedding wedding) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+//		this.mealChoice = mealChoice;
+		this.plusOne = plusOne;
+		this.attending = attending;
+//		this.userType = userType;
+//		this.wedding = wedding;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -90,14 +126,6 @@ public class User implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getUsername() {
@@ -116,13 +144,13 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public String getMealChoice() {
-		return mealChoice;
-	}
-
-	public void setMealChoice(String mealChoice) {
-		this.mealChoice = mealChoice;
-	}
+//	public MealTypes getMealChoice() {
+//		return mealChoice;
+//	}
+//
+//	public void setMealChoice(MealTypes mealChoice) {
+//		this.mealChoice = mealChoice;
+//	}
 
 	public boolean isPlusOne() {
 		return plusOne;
@@ -140,56 +168,46 @@ public class User implements Serializable{
 		this.attending = attending;
 	}
 
-	public int getUserType() {
-		return userType;
-	}
+//	public UserTypes getUserType() {
+//		return userType;
+//	}
+//
+//	public void setUserType(UserTypes userType) {
+//		this.userType = userType;
+//	}
+//
+//	public Wedding getWeddingId() {
+//		return wedding;
+//	}
+//
+//	public void setWedding(Wedding wedding) {
+//		this.wedding = wedding;
+//	}
 
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
+//	@Override
+//	public String toString() {
+//		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
+//				+ ", userType=" + userType + "]";
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		User other = (User) obj;
+//		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+//				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
+//				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
+//				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
+//	}
 
-	public String getWeddingId() {
-		return weddingId;
-	}
-
-	public void setWeddingId(String weddingId) {
-		this.weddingId = weddingId;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", username=" + username + ", password=" + password + ", mealChoice=" + mealChoice
-				+ ", plusOne=" + plusOne + ", attending=" + attending + ", userType=" + userType + ", weddingId="
-				+ weddingId + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(attending, email, fname, id, lname, mealChoice, password, phoneNumber, plusOne, userType,
-				username, weddingId);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(fname, other.fname)
-				&& Objects.equals(id, other.id) && Objects.equals(lname, other.lname)
-				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(password, other.password)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && plusOne == other.plusOne
-				&& userType == other.userType && Objects.equals(username, other.username)
-				&& Objects.equals(weddingId, other.weddingId);
-	}
-
-	
-	
-	
-	
-	
 }

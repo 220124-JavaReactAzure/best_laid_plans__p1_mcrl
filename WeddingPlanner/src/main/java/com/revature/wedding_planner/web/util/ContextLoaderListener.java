@@ -8,6 +8,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,17 +20,20 @@ import com.revature.wedding_planner.daos.UserDAO;
 import com.revature.wedding_planner.services.WeddingService;
 import com.revature.wedding_planner.services.UserService;
 import com.revature.wedding_planner.web.servlets.AuthServlet;
+import com.revature.wedding_planner.web.servlets.UserServlet;
 import com.revature.wedding_planner.web.servlets.WeddingServlet;
 
 @WebListener
 public class ContextLoaderListener implements ServletContextListener{
 	
 	private final Logger logger = LogManager.getLogger();
+	
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		logger.info("Application is initiliazing.....");
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new Hibernate5Module());
 		
 		UserDAO userDAO = new UserDAO();
 		WeddingDAO weddingDAO = new WeddingDAO();
@@ -36,12 +42,14 @@ public class ContextLoaderListener implements ServletContextListener{
 		//TODO add remaining services/daos
 		
 		WeddingServlet weddingServlet = new WeddingServlet(weddingService, mapper);
-		AuthServlet authServlet = new AuthServlet(userService, mapper);
+		UserServlet userServlet = new UserServlet(userService, mapper);
+		//AuthServlet authServlet = new AuthServlet(userService, mapper);
 		//TODO initiate remaining servlets
 		
 		ServletContext context = sce.getServletContext();
 		context.addServlet("WeddingServlet", weddingServlet).addMapping("/weddings/*");
-		context.addServlet("AuthServlet", authServlet).addMapping("/auth");
+		context.addServlet("UserServlet", userServlet).addMapping("/users/*");
+		//context.addServlet("AuthServlet", authServlet).addMapping("/auth");
 		//TODO add remaining servlets to the context
 		
 		
