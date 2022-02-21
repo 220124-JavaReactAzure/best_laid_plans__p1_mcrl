@@ -30,13 +30,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
 	private int id;
-	@Column(name = "user_name", columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+	@Column(name = "user_name", columnDefinition = "VARCHAR CHECK (user_name <> '')")
 	private String name;
-	@Column(name = "user_email", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+	@Column(name = "user_email", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (user_email <> '')")
 	private String email;
-	@Column(name = "user_username", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+	@Column(name = "user_username", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (user_username <> '')")
 	private String username;
-	@Column(name = "user_password", nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+	@Column(name = "user_password", nullable = false, columnDefinition = "VARCHAR CHECK (user_password <> '')")
 	private String password;
 	@Column(name = "user_plus_one")
 	private boolean plusOne;
