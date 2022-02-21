@@ -21,10 +21,12 @@ public class UserDAO implements CrudDAO<User>{
 	public User create(User newUser) {
 		try {
 			Session session = HibernateUtil.getSession();			
+			
 			//assign unique user id
 			//newUser.setId(UUID.randomUUID().toString());
-			
+			Transaction transaction = session.beginTransaction();
 			session.save(newUser);
+			transaction.commit();
 			return newUser;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
