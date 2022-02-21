@@ -45,14 +45,15 @@ public class User {
 
 	// TODO this might implement relational mapping between tables. may need to add
 	// nullable = false
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "meal_type_id")
-//	public MealTypes mealChoice;
-//	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "meal_type_id")
+	@JsonIgnoreProperties(value= {"users", "id"})
+	public MealTypes mealChoice;
+	
 //	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "wedding_id")
 //	public Wedding wedding;
-//	
+	
 //	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinColumn(name = "user_type_id")
 //	public UserTypes userType;
