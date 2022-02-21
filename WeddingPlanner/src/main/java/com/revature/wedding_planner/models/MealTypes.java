@@ -26,11 +26,12 @@ public class MealTypes {
 	@Column(name="meal_type_id")
 	private int id;
 	
-	@Column(name = "user_type")
+	@Column(name = "meal_type")
 	private String mealType;
 	
-	@OneToMany(mappedBy="users", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="user")
+	//TODO mappedBy and value need correction
+	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties(value="mealChoice")
 	private List<User> users;
 	
 	public MealTypes() {

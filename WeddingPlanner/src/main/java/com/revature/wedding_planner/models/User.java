@@ -97,7 +97,7 @@ public class User {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-//		this.mealChoice = mealChoice;
+		this.mealChoice = mealChoice;
 		this.plusOne = plusOne;
 		this.attending = attending;
 //		this.userType = userType;
@@ -144,13 +144,13 @@ public class User {
 		this.password = password;
 	}
 
-//	public MealTypes getMealChoice() {
-//		return mealChoice;
-//	}
-//
-//	public void setMealChoice(MealTypes mealChoice) {
-//		this.mealChoice = mealChoice;
-//	}
+	public MealTypes getMealChoice() {
+		return mealChoice;
+	}
+
+	public void setMealChoice(MealTypes mealChoice) {
+		this.mealChoice = mealChoice;
+	}
 
 	public boolean isPlusOne() {
 		return plusOne;
