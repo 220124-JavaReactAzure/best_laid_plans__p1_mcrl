@@ -30,13 +30,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
 	private int id;
-	@Column(name = "user_name")
+	@Column(name = "user_name", columnDefinition = "VARCHAR CHECK (meal_type <> '')")
 	private String name;
-	@Column(name = "user_email", unique = true, nullable = false)
+	@Column(name = "user_email", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
 	private String email;
-	@Column(name = "user_username", unique = true, nullable = false)
+	@Column(name = "user_username", unique = true, nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
 	private String username;
-	@Column(name = "user_password", nullable = false)
+	@Column(name = "user_password", nullable = false, columnDefinition = "VARCHAR CHECK (meal_type <> '')")
 	private String password;
 	@Column(name = "user_plus_one")
 	private boolean plusOne;
@@ -46,7 +46,7 @@ public class User {
 	// TODO this might implement relational mapping between tables. may need to add
 	// nullable = false
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "meal_type_id")
+	@JoinColumn(name = "meal_choice")
 	@JsonIgnoreProperties(value= {"users", "id"})
 	public MealTypes mealChoice;
 	
