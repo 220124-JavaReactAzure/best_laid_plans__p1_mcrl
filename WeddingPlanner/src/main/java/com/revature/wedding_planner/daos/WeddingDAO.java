@@ -2,7 +2,9 @@ package com.revature.wedding_planner.daos;
 
 import java.util.List;
 
-public class WeddingDAO<Wedding> implements CrudDAO<Wedding>{
+import com.revature.wedding_planner.models.Wedding;
+
+public class WeddingDAO implements CrudDAO<Wedding>{
 
 	@Override
 	public Wedding create(Wedding newObj) {

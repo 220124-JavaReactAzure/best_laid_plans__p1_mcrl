@@ -1,5 +1,13 @@
 package com.revature.wedding_planner.models;
 
-public class Wedding {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="wedding")
+public class Wedding implements Serializable{
 
 }
