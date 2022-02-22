@@ -27,7 +27,7 @@ public class UserTypes {
 	
 
 	@Column(name = "user_type", unique = true, nullable = false, 
-			columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+			columnDefinition = "VARCHAR CHECK (user_type <> '')")
 	private String userType;
 	
 	@OneToMany(mappedBy="userType", fetch=FetchType.EAGER)
