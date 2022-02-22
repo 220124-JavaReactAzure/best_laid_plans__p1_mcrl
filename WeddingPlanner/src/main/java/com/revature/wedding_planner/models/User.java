@@ -54,9 +54,10 @@ public class User {
 //	@JoinColumn(name = "wedding_id")
 //	public Wedding wedding;
 	
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_type_id")
-//	public UserTypes userType;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_type")
+	@JsonIgnoreProperties(value= {"users", "id"})
+	public UserTypes userType;
 
 	public User() {
 		super();

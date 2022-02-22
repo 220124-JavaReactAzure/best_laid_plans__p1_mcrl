@@ -2,8 +2,11 @@ package com.revature.wedding_planner.daos;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Query;
+
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -14,6 +17,7 @@ import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public class MealTypesDAO {
 	
+//	static Logger logger;
 	
 	public MealTypes create(MealTypes newMealType) {
 		try {
@@ -27,6 +31,7 @@ public class MealTypesDAO {
 			return newMealType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
+//			logger.log(Level.FINEST, "Exception thrown while creating mealType", e);
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -41,6 +46,7 @@ public class MealTypesDAO {
 			return mealTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
+//			logger.log(Level.FINEST, "Exception thrown while finding all mealTypes", e);
 			e.printStackTrace();
 			return null;
 		} finally {

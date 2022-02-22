@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="meal_types")
@@ -30,7 +29,7 @@ public class MealTypes {
 			columnDefinition = "VARCHAR CHECK (meal_type <> '')")
 	private String mealType;
 	
-	//TODO mappedBy and value need correction
+
 	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
 	@JsonIgnoreProperties(value="mealChoice")
 	private List<User> users;

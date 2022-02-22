@@ -3,6 +3,8 @@ package com.revature.wedding_planner.web.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,7 @@ import com.revature.wedding_planner.services.UserService;
 public class UserServlet extends HttpServlet {
 	private final UserService userService;
 	private final ObjectMapper mapper;
-
+	static Logger logger;
 	public UserServlet(UserService userService, ObjectMapper mapper) {
 		super();
 		this.userService = userService;
@@ -164,6 +166,7 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
+//			logger.log(Level.FINEST, "Exception thrown while creating user", e);
 			resp.getWriter().write("Some other random exception--did not persist user.");
 			e.printStackTrace();
 		}
