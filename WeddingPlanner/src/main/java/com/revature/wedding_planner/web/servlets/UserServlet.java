@@ -156,15 +156,15 @@ public class UserServlet extends HttpServlet {
 				resp.setStatus(201);
 			} else {
 				resp.setStatus(500);
-				resp.getWriter().write("Database did not persist");
+				resp.getWriter().write("Database did not persist user.");
 			}
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
-			resp.getWriter().write("JSON threw exception");
+			resp.getWriter().write("JSON threw exception.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception did not persist");
+			resp.getWriter().write("Some other random exception--did not persist user.");
 			e.printStackTrace();
 		}
 	}
@@ -177,11 +177,11 @@ public class UserServlet extends HttpServlet {
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
-			resp.getWriter().write("JSON threw exception");
+			resp.getWriter().write("JSON threw exception.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception did not persist");
+			resp.getWriter().write("Some other random exception--did not persist user update.");
 			e.printStackTrace();
 		}
 	}
