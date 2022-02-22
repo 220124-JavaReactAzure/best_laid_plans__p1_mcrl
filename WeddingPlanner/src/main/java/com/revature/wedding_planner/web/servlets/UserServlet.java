@@ -188,7 +188,18 @@ public class UserServlet extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doDelete(req, resp);
+		try {
+			User deletedUser = mapper.readValue(req.getInputStream(), User.class);
+			userService.deleteUser(deletedUser);
+			resp.setStatus(204);
+		} catch (StreamReadException | DatabindException e) {
+			resp.setStatus(400);
+			resp.getWriter().write("JSON threw exception.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			resp.setStatus(500);
+			resp.getWriter().write("Some other random exception--did not persist user deletion.");
+			e.printStackTrace();
+		}
 	}
 }

@@ -47,16 +47,16 @@ public class MealTypesService {
 	}
 
 	public List<MealTypes> getAllMealTypes() {
-		List<MealTypes> allUsers = mealTypesDAO.findAll();
+		List<MealTypes> allMealTypes = mealTypesDAO.findAll();
 		
-		if (allUsers == null) {
+		if (allMealTypes == null) {
 			return null;
 		} else {
-			return allUsers;
+			return allMealTypes;
 		}
 	}
 	
-	public void deleteUser(MealTypes mealType) {
+	public void deleteMealType(MealTypes mealType) {
 		mealTypesDAO.delete(mealType.getId());
 	}
 	private boolean isValidMealType(MealTypes mealType) {
