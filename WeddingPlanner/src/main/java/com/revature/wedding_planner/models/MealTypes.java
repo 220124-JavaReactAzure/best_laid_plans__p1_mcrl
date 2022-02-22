@@ -83,7 +83,7 @@ public class MealTypes {
 
 	@Override
 	public String toString() {
-		return "MealTypes [id=" + id + ", mealType=" + mealType + "]";
+		return "[mealType=" + mealType + "]";
 	}
 
 	@Override
