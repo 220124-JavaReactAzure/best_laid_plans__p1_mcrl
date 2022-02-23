@@ -25,9 +25,8 @@ public class UserTypes {
 	@Column(name="user_type_id")
 	private int id;
 	
-
-	@Column(name = "user_type", unique = true, nullable = false, 
-			columnDefinition = "VARCHAR CHECK (user_type <> '')")
+	//try without columnDefinition and/or check azure column definition syntax
+	@Column(name = "user_type", unique = true, nullable = false)
 	private String userType;
 	
 	@OneToMany(mappedBy="userType", fetch=FetchType.EAGER)

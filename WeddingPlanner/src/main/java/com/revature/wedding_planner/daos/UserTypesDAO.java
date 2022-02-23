@@ -16,16 +16,16 @@ public class UserTypesDAO {
 	 
 //	static Logger logger;
 	
-	public UserTypes create(UserTypes newUserTypes) {
+	public UserTypes create(UserTypes newUserType) {
 		try {
 			Session session = HibernateUtil.getSession();			
 			
 			//assign unique user id
 			//newUser.setId(UUID.randomUUID().toString());
 			Transaction transaction = session.beginTransaction();
-			session.save(newUserTypes);
+			session.save(newUserType);
 			transaction.commit();
-			return newUserTypes;
+			return newUserType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
 //			logger.log(Level.FINEST, "Exception thrown while creating userType", e);

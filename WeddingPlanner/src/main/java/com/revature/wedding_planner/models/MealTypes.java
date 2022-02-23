@@ -25,8 +25,7 @@ public class MealTypes {
 	@Column(name="meal_type_id")
 	private int id;
 	
-	@Column(name = "meal_type", unique = true, nullable = false, 
-			columnDefinition = "VARCHAR CHECK (meal_type <> '')")
+	@Column(name = "meal_type", unique = true, nullable = false)
 	private String mealType;
 	
 
