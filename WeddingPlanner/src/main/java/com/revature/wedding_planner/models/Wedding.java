@@ -1,6 +1,5 @@
 package com.revature.wedding_planner.models;
 
-
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +18,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 
 @Entity
 @Table(name="wedding")
@@ -64,7 +62,7 @@ public class Wedding {
 	private int photographer;
 	
 	@OneToMany(mappedBy="wedding", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="mealChoice")
+	@JsonIgnoreProperties(value="wedding")
 	private List<User> users;
 
 	public Wedding() {

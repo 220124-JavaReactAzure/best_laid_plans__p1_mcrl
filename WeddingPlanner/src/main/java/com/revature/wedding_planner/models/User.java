@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -20,7 +19,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "users")
-//TODO check if generator can be omitted for non-serial id types
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 	@Id
@@ -39,9 +37,7 @@ public class User {
 	private boolean plusOne;
 	@Column(name = "user_is_attending")
 	private boolean attending;
-
-	// TODO this might implement relational mapping between tables. may need to add
-	// nullable = false
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "meal_choice")
 	@JsonIgnoreProperties(value= {"users", "id"})
