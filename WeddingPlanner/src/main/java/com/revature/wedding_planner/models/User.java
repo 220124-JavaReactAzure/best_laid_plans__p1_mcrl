@@ -45,6 +45,8 @@ public class User {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_id")
+	@JsonIgnoreProperties(value= {"users", "name", "date", "headCount", 
+			"cost", "venue", "florist", "caterer","musician", "photographer"})
 	public Wedding wedding;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

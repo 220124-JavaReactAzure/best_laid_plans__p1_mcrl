@@ -38,27 +38,27 @@ public class Wedding {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_venue")
-	@JsonIgnoreProperties(value= {"users", "id"})
+	@JsonIgnoreProperties(value= {"weddings", "id"})
 	private int venue;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_florist")
-	@JsonIgnoreProperties(value= {"users", "id"})
+	@JsonIgnoreProperties(value= {"weddings", "id"})
 	private int florist;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_caterer")
-	@JsonIgnoreProperties(value= {"users", "id"})
+	@JsonIgnoreProperties(value= {"weddings", "id"})
 	private int caterer;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_musician")
-	@JsonIgnoreProperties(value= {"users", "id"})
+	@JsonIgnoreProperties(value= {"weddings", "id"})
 	private int musician;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_photographer")
-	@JsonIgnoreProperties(value= {"users", "id"})
+	@JsonIgnoreProperties(value= {"weddings", "id"})
 	private int photographer;
 	
 	@OneToMany(mappedBy="wedding", fetch=FetchType.EAGER)
