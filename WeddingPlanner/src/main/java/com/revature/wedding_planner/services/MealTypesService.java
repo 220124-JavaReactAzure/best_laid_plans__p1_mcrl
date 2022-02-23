@@ -56,10 +56,15 @@ public class MealTypesService {
 		}
 	}
 	
-	public void deleteMealType(MealTypes mealType) {
-		mealTypesDAO.delete(mealType.getId());
+	public boolean deleteMealType(MealTypes mealType) {
+		if(mealTypesDAO.delete(mealType)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-	private boolean isValidMealType(MealTypes mealType) {
+	public boolean isValidMealType(MealTypes mealType) {
 		// TODO expand validity checking
 		if(mealType != null) {
 			return true;

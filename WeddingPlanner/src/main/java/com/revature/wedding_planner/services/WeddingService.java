@@ -59,7 +59,7 @@ private final WeddingDAO weddingDAO;
 	public void deleteWedding(Wedding wedding) {
 		weddingDAO.delete(wedding.getId());
 	}
-	private boolean isValidWedding(Wedding wedding) {
+	public boolean isValidWedding(Wedding wedding) {
 		// TODO expand validity checking
 		if(wedding != null) {
 			return true;

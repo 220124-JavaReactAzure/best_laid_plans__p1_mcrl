@@ -100,11 +100,10 @@ public class MealTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public boolean delete(int id) {
+	public boolean delete(MealTypes deletedMealType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			MealTypes deletedMealType = this.findById(id);
 			session.delete(deletedMealType);
 			transaction.commit();
 			return true;
