@@ -5,8 +5,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,10 +29,9 @@ public class MealTypesServiceTestSuite {
 		sut = new MealTypesService(mockMealTypesDAO);
 	}
 
-	// add
+// add
 	@Test
 	public void test_addMealType_returnsTrue_givenValidMealType() {
-		// TODO
 		MealTypes validMealType = new MealTypes("valid");
 
 		when(mockMealTypesDAO.findByMealType(validMealType.getMealType())).thenReturn(null);
@@ -48,7 +50,6 @@ public class MealTypesServiceTestSuite {
 
 	@Test(expected = ResourcePersistenceException.class)
 	public void test_addMealType_throwsResourcePersistenceException_givenDuplicateMealType() {
-		// TODO
 		MealTypes duplicateMealType = new MealTypes("valid");
 
 		when(mockMealTypesDAO.findByMealType(duplicateMealType.getMealType())).thenReturn(duplicateMealType);
@@ -56,94 +57,109 @@ public class MealTypesServiceTestSuite {
 
 		boolean actualResult = sut.addMealType(duplicateMealType);
 
-		Assert.assertTrue(actualResult);
+		Assert.assertFalse(actualResult);
 		verify(mockMealTypesDAO, times(1)).create(duplicateMealType);
 
 	}
 
-	// update
+// update
 	@Test
-	public void test_updateMealType_returnsTrue_givenValidMealType() {
-		// TODO
-		MealTypes validMealType = new MealTypes("beef");
+	public void test_updateMealType_returnTrue_givenInvalidMealType() {
+		MealTypes updatedMealType = new MealTypes("valid");
+		when(mockMealTypesDAO.update(updatedMealType)).thenReturn(true);
 
-		MealTypes actualResult = sut.updateMealType(validMealType);
+		MealTypes actualResult = sut.updateMealType(updatedMealType);
 
 		Assert.assertNotNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).update(updatedMealType);
 	}
 
-	@Test
-	public void test_updateMealType_returnFalse_givenInvalidMealType() {
-		// TODO
-		MealTypes invalidMealType = null;
+	@Test(expected = ResourcePersistenceException.class)
+	public void test_updateMealType_throwsResourcePersistenceException_givenValidMealType() {
+		MealTypes updatedMealType = null;
+		when(mockMealTypesDAO.update(updatedMealType)).thenReturn(false);
 
-		MealTypes actualResult = sut.updateMealType(invalidMealType);
+		MealTypes actualResult = sut.updateMealType(updatedMealType);
 
 		Assert.assertNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).update(updatedMealType);
 	}
 
-	// getByID
+// getByID
 	@Test
 	public void test_getMealTypeByID_returnsNotNull_givenValidId() {
-		// TODO
+		MealTypes updatedMealType = new MealTypes(1, "valid");
+		when(mockMealTypesDAO.findById(updatedMealType.getId())).thenReturn(updatedMealType);
 
-		MealTypes actualResult = sut.getMealTypeByID(1);
+		MealTypes actualResult = sut.getMealTypeByID(updatedMealType.getId());
 
 		Assert.assertNotNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).findById(updatedMealType.getId());
 	}
 
 	@Test
 	public void test_getMealTypeByID_returnNull_givenInvalidId() {
-		// TODO
+		MealTypes updatedMealType = new MealTypes(0, "invalid");
 
-		MealTypes actualResult = sut.getMealTypeByID(0);
+		when(mockMealTypesDAO.findById(updatedMealType.getId())).thenReturn(null);
+
+		MealTypes actualResult = sut.getMealTypeByID(updatedMealType.getId());
 
 		Assert.assertNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).findById(updatedMealType.getId());
 	}
 
-	// getAll
+// getAll
 	@Test
 	public void test_getAllMealTypes_returnsNotNull_givenValidMealTypeCollection() {
-		// TODO
+		List<MealTypes> allMealTypes = new ArrayList<>();
+
+		when(mockMealTypesDAO.findAll()).thenReturn(allMealTypes);
+
 		List<MealTypes> actualResult = sut.getAllMealTypes();
 
 		Assert.assertNotNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).findAll();
 	}
 
 	@Test
 	public void test_getAllMealTypes_returnNull_givenInvalidMealTypeCollection() {
-		// TODO
+		when(mockMealTypesDAO.findAll()).thenReturn(null);
 
 		List<MealTypes> actualResult = sut.getAllMealTypes();
 
 		Assert.assertNull(actualResult);
+		verify(mockMealTypesDAO, times(1)).findAll();
 	}
 
-	// delete
+// delete
 	@Test
 	public void test_deleteMealType_returnsTrue_givenValidMealType() {
+		MealTypes validMealType = new MealTypes("valid");
 
-		MealTypes validMealType = new MealTypes("beef");
+		when(mockMealTypesDAO.delete(validMealType)).thenReturn(true);
 
 		boolean actualResult = sut.deleteMealType(validMealType);
 
 		Assert.assertTrue(actualResult);
+		verify(mockMealTypesDAO, times(1)).delete(validMealType);
 	}
 
 	@Test
 	public void test_deleteMealType_returnsFalse_givenInvalidMealType() {
-
 		MealTypes invalidMealType = null;
+
+		when(mockMealTypesDAO.delete(invalidMealType)).thenReturn(false);
 
 		boolean actualResult = sut.deleteMealType(invalidMealType);
 
 		Assert.assertFalse(actualResult);
+		verify(mockMealTypesDAO, times(1)).delete(invalidMealType);
 	}
 
-	// isValid
+// isValid
 	@Test
 	public void test_isMealTypeValid_returnsTrue_givenValidMealType() {
-
 		MealTypes validMealType = new MealTypes("beef");
 
 		boolean actualResult = sut.isValidMealType(validMealType);
@@ -153,7 +169,6 @@ public class MealTypesServiceTestSuite {
 
 	@Test
 	public void test_isMealTypeValid_returnsFalse_givenInvalidMealType() {
-
 		MealTypes invalidMealType = null;
 
 		boolean actualResult = sut.isValidMealType(invalidMealType);
