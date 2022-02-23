@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,22 +16,22 @@ import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public class WeddingDAO {
 
-//	static Logger logger;
+	private final Logger logger = LogManager.getLogger();
 
 	public Wedding create(Wedding newWedding) {
 		try {
 			Session session = HibernateUtil.getSession();
 
-			// assign unique user id
-			// newUser.setId(UUID.randomUUID().toString());
+			// assign unique  id
+			// newObject.setId(UUID.randomUUID().toString());
 			Transaction transaction = session.beginTransaction();
 			session.save(newWedding);
 			transaction.commit();
 			return newWedding;
 		} catch (HibernateException | IOException e) {
 			// TODO implement logging
-//			logger.log(Level.FINEST, "Exception thrown while creating wedding", e);
-			e.printStackTrace();
+			logger.log(logger.getLevel(), "Exception thrown while creating wedding", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
@@ -43,8 +45,8 @@ public class WeddingDAO {
 			return weddings;
 		} catch (HibernateException | IOException e) {
 			// TODO implement logging
-//			logger.log(Level.FINEST, "Exception thrown while finding all weddings", e);
-			e.printStackTrace();
+			logger.log(logger.getLevel(), "Exception thrown while finding all weddings", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
