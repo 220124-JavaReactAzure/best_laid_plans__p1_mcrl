@@ -30,6 +30,9 @@ public class MealTypesService {
 	}
 	
 	public MealTypes updateMealType(MealTypes updatedMealType) {
+		if(!isValidMealType(updatedMealType)) {
+			throw new InvalidRequestException("Invalid mealType data provided");
+		}
 		if (!mealTypesDAO.update(updatedMealType)) {
 			throw new ResourcePersistenceException("Failure updating mealType.");
 		}
@@ -57,12 +60,7 @@ public class MealTypesService {
 	}
 	
 	public boolean deleteMealType(MealTypes mealType) {
-		if(mealTypesDAO.delete(mealType)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return mealTypesDAO.delete(mealType);
 	}
 	public boolean isValidMealType(MealTypes mealType) {
 		// TODO expand validity checking
