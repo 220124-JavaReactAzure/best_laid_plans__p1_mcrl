@@ -39,7 +39,7 @@ public class UserTypeDAO {
 	public List<UserType> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
-			List<UserType> userTypes = session.createQuery("FROM UserTypes").list();
+			List<UserType> userTypes = session.createQuery("FROM UserType").list();
 			return userTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging

@@ -42,7 +42,7 @@ public class MealTypeDAO {
 	public List<MealType> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
-			List<MealType> mealTypes = session.createQuery("FROM MealTypes").list();
+			List<MealType> mealTypes = session.createQuery("FROM MealType").list();
 			return mealTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
