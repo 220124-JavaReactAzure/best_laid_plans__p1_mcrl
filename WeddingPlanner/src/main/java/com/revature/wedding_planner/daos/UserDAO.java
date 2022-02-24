@@ -15,11 +15,11 @@ import org.hibernate.Transaction;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class UserDAO implements CrudDAO<User>{
+public class UserDAO {
 
 //	static Logger logger;
 	
-	@Override
+
 	public User create(User newUser) {
 		try {
 			Session session = HibernateUtil.getSession();			
@@ -40,7 +40,6 @@ public class UserDAO implements CrudDAO<User>{
 		}
 	}
 
-	@Override
 	public List<User> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -55,7 +54,6 @@ public class UserDAO implements CrudDAO<User>{
 		}
 	}
 
-	@Override
 	public User findById(String id) {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -84,7 +82,6 @@ public class UserDAO implements CrudDAO<User>{
 		}
 	}
 
-	@Override
 	public boolean update(User updatedUser) {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -102,7 +99,6 @@ public class UserDAO implements CrudDAO<User>{
 		}
 	}
 
-	@Override
 	public boolean delete(String id) {
 		try {
 			Session session = HibernateUtil.getSession();
