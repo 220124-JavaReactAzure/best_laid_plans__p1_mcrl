@@ -34,7 +34,7 @@ public class MealTypeServlet extends HttpServlet {
 			List<MealType> mealTypes = mealTypesService.getAllMealTypes();
 			String payload = "";
 			for (MealType mealType: mealTypes) {
-				payload += mapper.writeValueAsString(mealType.getMealType()) + "\n";
+				payload += mapper.writeValueAsString(mealType) + "\n";
 			}
 			
 			writer.write(payload);

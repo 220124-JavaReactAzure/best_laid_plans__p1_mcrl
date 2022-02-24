@@ -36,7 +36,7 @@ public class WeddingServlet extends HttpServlet{
 			List<Wedding> weddings = weddingService.getAllWeddings();
 			String payload = "";
 			for (Wedding wedding: weddings) {
-				payload += mapper.writeValueAsString(wedding.getName()) + "\n";
+				payload += mapper.writeValueAsString(wedding) + "\n";
 			}
 			writer.write(payload);
 			resp.setStatus(200);

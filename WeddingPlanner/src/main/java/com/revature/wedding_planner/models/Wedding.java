@@ -82,14 +82,13 @@ public class Wedding {
 		this.name = name;
 	}
 
-	public Wedding(int id, String date, String name, int headCount, double cost, List<User> users) {
+	public Wedding(int id, String date, String name, int headCount, double cost) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.name = name;
 		this.headCount = headCount;
 		this.cost = cost;
-		this.users = users;
 	}
 
 //	public Wedding(int id, String date, String name, int headCount, double cost, Vendor venue, Vendor florist, Vendor caterer,
@@ -186,15 +185,15 @@ public class Wedding {
 //	public void setPhotographer(Vendor photographer) {
 //		this.photographer = photographer;
 //	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
+//
+//	public List<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
+//
 //	@Override
 //	public String toString() {
 //		return "Wedding [date=" + date + ", name=" + name + ", headCount=" + headCount + ", cost=" + cost + ", venue="
