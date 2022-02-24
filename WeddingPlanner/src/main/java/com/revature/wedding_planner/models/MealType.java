@@ -48,13 +48,6 @@ public class MealType {
 		this.mealType = mealType;
 	}
 
-	public MealType(int id, String mealType, List<User> users) {
-		super();
-		this.id = id;
-		this.mealType = mealType;
-		this.users = users;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -71,14 +64,6 @@ public class MealType {
 		this.mealType = mealType;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
 	@Override
 	public String toString() {
 		return "[" + mealType + "]";
@@ -86,7 +71,7 @@ public class MealType {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, mealType, users);
+		return Objects.hash(id, mealType);
 	}
 
 	@Override
@@ -98,7 +83,7 @@ public class MealType {
 		if (getClass() != obj.getClass())
 			return false;
 		MealType other = (MealType) obj;
-		return id == other.id && Objects.equals(mealType, other.mealType) && Objects.equals(users, other.users);
+		return id == other.id && Objects.equals(mealType, other.mealType);
 	}
 	
 	

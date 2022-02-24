@@ -42,17 +42,10 @@ public class UserType {
 		this.userType = userType;
 	}
 
-	public UserType(String userType, List<User> users) {
-		super();
-		this.userType = userType;
-		this.users = users;
-	}
-
-	public UserType(int id, String userType, List<User> users) {
+	public UserType(int id, String userType) {
 		super();
 		this.id = id;
 		this.userType = userType;
-		this.users = users;
 	}
 
 	public int getId() {
@@ -71,14 +64,6 @@ public class UserType {
 		this.userType = userType;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
 	@Override
 	public String toString() {
 		return "UserTypes [userType=" + userType + "]";
@@ -86,7 +71,7 @@ public class UserType {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, userType, users);
+		return Objects.hash(id, userType);
 	}
 
 	@Override
@@ -98,8 +83,7 @@ public class UserType {
 		if (getClass() != obj.getClass())
 			return false;
 		UserType other = (UserType) obj;
-		return Objects.equals(id, other.id) && Objects.equals(userType, other.userType)
-				&& Objects.equals(users, other.users);
+		return Objects.equals(id, other.id) && Objects.equals(userType, other.userType);
 	}
 
 	

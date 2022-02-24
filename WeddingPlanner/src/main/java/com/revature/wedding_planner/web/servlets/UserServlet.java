@@ -3,8 +3,7 @@ package com.revature.wedding_planner.web.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.wedding_planner.models.MealType;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.services.UserService;
 
@@ -63,7 +61,7 @@ public class UserServlet extends HttpServlet {
 			String payload = "";
 			for (User user : users) {
 				
-				payload += mapper.writeValueAsString(user.getUsername()) + "\n";
+				payload += mapper.writeValueAsString(user) + "\n";
 			}
 			writer.write(payload);
 			resp.setStatus(200);

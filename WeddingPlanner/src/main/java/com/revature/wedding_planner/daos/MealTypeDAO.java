@@ -2,12 +2,12 @@ package com.revature.wedding_planner.daos;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.persistence.Query;
 
-
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,22 +17,19 @@ import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public class MealTypeDAO {
 	
-//	static Logger logger;
+	private static final Logger logger = LogManager.getLogger();
 	
 	public MealType create(MealType newMealType) {
 		try {
 			Session session = HibernateUtil.getSession();			
-			
-			//assign unique user id
-			//newUser.setId(UUID.randomUUID().toString());
 			Transaction transaction = session.beginTransaction();
 			session.save(newMealType);
 			transaction.commit();
 			return newMealType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
-//			logger.log(Level.FINEST, "Exception thrown while creating mealType", e);
-			e.printStackTrace();
+			logger.log(Level.DEBUG,"Exception thrown while creating mealType", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
@@ -46,8 +43,8 @@ public class MealTypeDAO {
 			return mealTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
-//			logger.log(Level.FINEST, "Exception thrown while finding all mealTypes", e);
-			e.printStackTrace();
+			logger.log(Level.DEBUG, "Exception thrown while finding all mealTypes", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
@@ -61,7 +58,8 @@ public class MealTypeDAO {
 			return foundMealType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
-			e.printStackTrace();
+			logger.log(Level.DEBUG, "Exception thrown while finding mealType by id", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
@@ -78,7 +76,8 @@ public class MealTypeDAO {
 			return foundMealType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
-			e.printStackTrace();
+			logger.log(Level.DEBUG, "Exception thrown while finding mealType by mealType(string)", e);
+//			e.printStackTrace();
 			return null;
 		} finally {
 			HibernateUtil.closeSession();
@@ -94,6 +93,7 @@ public class MealTypeDAO {
 			return true;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
+			logger.log(Level.DEBUG, "Exception thrown while finding mealType by mealType(string)", e);
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -109,7 +109,8 @@ public class MealTypeDAO {
 			return true;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
-			e.printStackTrace();
+			logger.log(Level.DEBUG, "Exception thrown while deleting mealType", e);
+//			e.printStackTrace();
 			return false;
 		} finally {
 			HibernateUtil.closeSession();
