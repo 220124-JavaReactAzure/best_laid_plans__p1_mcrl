@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import com.revature.wedding_planner.daos.MealTypesDAO;
 import com.revature.wedding_planner.models.MealTypes;
@@ -34,7 +35,7 @@ public class MealTypesServiceTestSuite {
 	@Test
 	public void test_addMealType_returnsTrue_givenValidMealType() {
 		MealTypes validMealType = new MealTypes("valid");
-
+		
 		when(mockMealTypesDAO.findByMealType(validMealType.getMealType())).thenReturn(null);
 		when(mockMealTypesDAO.create(validMealType)).thenReturn(validMealType);
 
@@ -162,7 +163,7 @@ public class MealTypesServiceTestSuite {
 // isValid
 	@Test
 	public void test_isMealTypeValid_returnsTrue_givenValidMealType() {
-		MealTypes validMealType = new MealTypes("beef");
+		MealTypes validMealType = new MealTypes("valid");
 
 		boolean actualResult = sut.isValidMealType(validMealType);
 

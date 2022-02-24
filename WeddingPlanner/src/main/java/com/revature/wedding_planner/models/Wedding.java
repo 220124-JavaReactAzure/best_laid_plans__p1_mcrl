@@ -39,27 +39,27 @@ public class Wedding {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_venue")
 	@JsonIgnoreProperties(value= {"weddings", "id"})
-	private int venue;
+	public Vendor venue;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_florist")
 	@JsonIgnoreProperties(value= {"weddings", "id"})
-	private int florist;
+	public Vendor florist;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_caterer")
 	@JsonIgnoreProperties(value= {"weddings", "id"})
-	private int caterer;
+	public Vendor caterer;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_musician")
 	@JsonIgnoreProperties(value= {"weddings", "id"})
-	private int musician;
+	public Vendor musician;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_photographer")
 	@JsonIgnoreProperties(value= {"weddings", "id"})
-	private int photographer;
+	public Vendor photographer;
 	
 	@OneToMany(mappedBy="wedding", fetch=FetchType.EAGER)
 	@JsonIgnoreProperties(value="wedding")
@@ -75,8 +75,8 @@ public class Wedding {
 		this.name = name;
 	}
 
-	public Wedding(int id, String date, String name, int headCount, double cost, int venue, int florist, int caterer,
-			int musician, int photographer) {
+	public Wedding(int id, String date, String name, int headCount, double cost, Vendor venue, Vendor florist, Vendor caterer,
+			Vendor musician, Vendor photographer) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -130,43 +130,43 @@ public class Wedding {
 		this.cost = cost;
 	}
 
-	public int getVenue() {
+	public Vendor getVenue() {
 		return venue;
 	}
 
-	public void setVenue(int venue) {
+	public void setVenue(Vendor venue) {
 		this.venue = venue;
 	}
 
-	public int getFlorist() {
+	public Vendor getFlorist() {
 		return florist;
 	}
 
-	public void setFlorist(int florist) {
+	public void setFlorist(Vendor florist) {
 		this.florist = florist;
 	}
 
-	public int getCaterer() {
+	public Vendor getCaterer() {
 		return caterer;
 	}
 
-	public void setCaterer(int caterer) {
+	public void setCaterer(Vendor caterer) {
 		this.caterer = caterer;
 	}
 
-	public int getMusician() {
+	public Vendor getMusician() {
 		return musician;
 	}
 
-	public void setMusician(int musician) {
+	public void setMusician(Vendor musician) {
 		this.musician = musician;
 	}
 
-	public int getPhotographer() {
+	public Vendor getPhotographer() {
 		return photographer;
 	}
 
-	public void setPhotographer(int photographer) {
+	public void setPhotographer(Vendor photographer) {
 		this.photographer = photographer;
 	}
 

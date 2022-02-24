@@ -13,6 +13,7 @@ import org.hibernate.service.ServiceRegistry;
 import com.revature.wedding_planner.models.MealTypes;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.models.UserTypes;
+import com.revature.wedding_planner.models.Vendor;
 import com.revature.wedding_planner.models.Wedding;
 
 // TODO: Implement me
