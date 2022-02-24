@@ -81,7 +81,7 @@ public class MealType {
 
 	@Override
 	public String toString() {
-		return "[mealType=" + mealType + "]";
+		return "[" + mealType + "]";
 	}
 
 	@Override

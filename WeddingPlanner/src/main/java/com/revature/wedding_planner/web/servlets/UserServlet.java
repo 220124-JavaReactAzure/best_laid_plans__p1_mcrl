@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.wedding_planner.models.MealType;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.services.UserService;
 
@@ -59,7 +60,10 @@ public class UserServlet extends HttpServlet {
 			break;
 		default:
 			List<User> users = userService.getAllUsers();
-			String payload = mapper.writeValueAsString(users);
+			String payload = "";
+			for (User user: users) {
+				payload += mapper.writeValueAsString(user.getName());
+			}
 			writer.write(payload);
 			resp.setStatus(200);
 			break;
@@ -110,6 +114,7 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			//add parameter options for delete by Id, currently only works with fully formed objects
 			User deletedUser = mapper.readValue(req.getInputStream(), User.class);
 			userService.deleteUser(deletedUser);
 			resp.setStatus(204);

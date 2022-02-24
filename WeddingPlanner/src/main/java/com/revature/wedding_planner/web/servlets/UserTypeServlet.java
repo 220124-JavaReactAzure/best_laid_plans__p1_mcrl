@@ -94,7 +94,10 @@ public class UserTypeServlet extends HttpServlet {
 			break;
 		default:
 			List<UserType> userTypes = userTypeService.getAllUserTypes();
-			String payload = mapper.writeValueAsString(userTypes);
+			String payload = "";
+			for (UserType userType: userTypes) {
+				payload += mapper.writeValueAsString(userType.getUserType());
+			}
 			writer.write(payload);
 			resp.setStatus(200);
 			break;

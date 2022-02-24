@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.wedding_planner.models.UserType;
 import com.revature.wedding_planner.models.Wedding;
 import com.revature.wedding_planner.services.WeddingService;
 
@@ -33,7 +34,10 @@ public class WeddingServlet extends HttpServlet{
 		try {
 			//TODO add parameterized options for specific weddings
 			List<Wedding> weddings = weddingService.getAllWeddings();
-			String payload = mapper.writeValueAsString(weddings);
+			String payload = "";
+			for (Wedding wedding: weddings) {
+				payload += mapper.writeValueAsString(wedding.getName());
+			}
 			writer.write(payload);
 			resp.setStatus(200);
 		} catch (StreamReadException | DatabindException e) {

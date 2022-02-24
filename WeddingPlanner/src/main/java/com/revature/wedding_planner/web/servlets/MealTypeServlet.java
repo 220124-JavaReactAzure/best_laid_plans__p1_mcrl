@@ -32,7 +32,11 @@ public class MealTypeServlet extends HttpServlet {
 
 		try {
 			List<MealType> mealTypes = mealTypesService.getAllMealTypes();
-			String payload = mapper.writeValueAsString(mealTypes);
+			String payload = "";
+			for (MealType mealType: mealTypes) {
+				payload += mapper.writeValueAsString(mealType.getMealType());
+			}
+			
 			writer.write(payload);
 			resp.setStatus(200);
 		} catch (StreamReadException | DatabindException e) {
