@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
 					writer.write("Please include the query ?username=# in your url");
 					return;
 				}
-				//changed to int type to support change to serial generated int id type
+				// changed to int type to support change to serial generated int id type
 				int userId = Integer.parseInt(idParam);
 
 				User user = userService.getUserByID(userId);
@@ -61,8 +61,9 @@ public class UserServlet extends HttpServlet {
 		default:
 			List<User> users = userService.getAllUsers();
 			String payload = "";
-			for (User user: users) {
-				payload += mapper.writeValueAsString(user.getName());
+			for (User user : users) {
+				
+				payload += mapper.writeValueAsString(user.getUsername()) + "\n";
 			}
 			writer.write(payload);
 			resp.setStatus(200);
@@ -114,7 +115,8 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			//add parameter options for delete by Id, currently only works with fully formed objects
+			// add parameter options for delete by Id, currently only works with fully
+			// formed objects
 			User deletedUser = mapper.readValue(req.getInputStream(), User.class);
 			userService.deleteUser(deletedUser);
 			resp.setStatus(204);
