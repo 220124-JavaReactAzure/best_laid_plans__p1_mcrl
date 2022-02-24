@@ -5,6 +5,7 @@ import java.util.List;
 import com.revature.wedding_planner.daos.UserTypeDAO;
 import com.revature.wedding_planner.exceptions.InvalidRequestException;
 import com.revature.wedding_planner.exceptions.ResourcePersistenceException;
+import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.models.UserType;
 
 public class UserTypeService {
@@ -73,7 +74,7 @@ public class UserTypeService {
 
 	}
 
-	public List<UserType> getAllUsersByType(String string) {
+	public List<User> getAllUsersByType(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}

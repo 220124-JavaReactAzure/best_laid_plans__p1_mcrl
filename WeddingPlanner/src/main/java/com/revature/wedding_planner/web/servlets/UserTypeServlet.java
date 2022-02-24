@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.models.UserType;
 import com.revature.wedding_planner.services.UserTypeService;
 
@@ -36,7 +37,7 @@ public class UserTypeServlet extends HttpServlet {
 		// TODO
 		case "/attendees":
 			try {
-				List<UserType> users = userTypeService.getAllUsersByType("attendee");
+				List<User> users = userTypeService.getAllUsersByType("attendee");
 				if (users == null) {
 					writer.write("Retrieval by userType not fully implemented yet");
 					resp.setStatus(500);
@@ -49,13 +50,13 @@ public class UserTypeServlet extends HttpServlet {
 				resp.setStatus(400);
 			}
 
-			writer.write("All attendees: ");
+			writer.write("All attendees");
 			resp.setStatus(200);
 			break;
 		// TODO
 		case "/betrothed":
 			try {
-				List<UserType> users = userTypeService.getAllUsersByType("betrothed");
+				List<User> users = userTypeService.getAllUsersByType("betrothed");
 				if (users == null) {
 					writer.write("Retrieval by userType not fully implemented yet");
 					resp.setStatus(500);
@@ -68,14 +69,14 @@ public class UserTypeServlet extends HttpServlet {
 				resp.setStatus(400);
 			}
 
-			writer.write("All betrothed: ");
+			writer.write("All betrothed");
 			resp.setStatus(200);
 			break;
 		// TODO
 		case "/staff":
 			try {
 
-				List<UserType> users = userTypeService.getAllUsersByType("staff");
+				List<User> users = userTypeService.getAllUsersByType("staff");
 				if (users == null) {
 					writer.write("Retrieval by userType not fully implemented yet");
 					resp.setStatus(500);
@@ -88,18 +89,14 @@ public class UserTypeServlet extends HttpServlet {
 				resp.setStatus(400);
 			}
 
-			writer.write("All staff: ");
+			writer.write("All staff");
 			resp.setStatus(200);
 			break;
 		default:
-			try {
-				List<UserType> userTypes = userTypeService.getAllUserTypes();
-				String payload = mapper.writeValueAsString(userTypes);
-				writer.write(payload);
-				resp.setStatus(200);
-			} catch (StreamReadException | DatabindException e) {
-				resp.setStatus(400);
-			}
+			List<UserType> userTypes = userTypeService.getAllUserTypes();
+			String payload = mapper.writeValueAsString(userTypes);
+			writer.write(payload);
+			resp.setStatus(200);
 			break;
 		}
 	}
