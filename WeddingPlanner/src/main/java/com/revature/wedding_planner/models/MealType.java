@@ -15,40 +15,40 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="meal_types")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class MealTypes {
+public class MealType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="meal_type_id")
 	private int id;
 	
-	@Column(name = "user_type")
+	@Column(name = "meal_type", unique = true, nullable = false)
 	private String mealType;
 	
-	@OneToMany(mappedBy="users", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="user")
+
+	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties(value="mealChoice")
 	private List<User> users;
 	
-	public MealTypes() {
+	public MealType() {
 		super();
 	}
 
-	public MealTypes(String mealType) {
+	public MealType(String mealType) {
 		super();
 		this.mealType = mealType;
 	}
 
-	public MealTypes(int id, String mealType) {
+	public MealType(int id, String mealType) {
 		super();
 		this.id = id;
 		this.mealType = mealType;
 	}
 
-	public MealTypes(int id, String mealType, List<User> users) {
+	public MealType(int id, String mealType, List<User> users) {
 		super();
 		this.id = id;
 		this.mealType = mealType;
@@ -81,7 +81,7 @@ public class MealTypes {
 
 	@Override
 	public String toString() {
-		return "MealTypes [id=" + id + ", mealType=" + mealType + "]";
+		return "[" + mealType + "]";
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class MealTypes {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MealTypes other = (MealTypes) obj;
+		MealType other = (MealType) obj;
 		return id == other.id && Objects.equals(mealType, other.mealType) && Objects.equals(users, other.users);
 	}
 	

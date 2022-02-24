@@ -1,6 +1,5 @@
 package com.revature.wedding_planner.models;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -12,18 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "users")
-//TODO check if generator can be omitted for non-serial id types
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 	@Id
@@ -42,21 +37,22 @@ public class User {
 	private boolean plusOne;
 	@Column(name = "user_is_attending")
 	private boolean attending;
-
-	// TODO this might implement relational mapping between tables. may need to add
-	// nullable = false
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "meal_type_id")
+	@JoinColumn(name = "meal_choice")
 	@JsonIgnoreProperties(value= {"users", "id"})
-	public MealTypes mealChoice;
+	public MealType mealChoice;
 	
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "wedding_id")
-//	public Wedding wedding;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "wedding_id")
+	@JsonIgnoreProperties(value= {"users", "name", "date", "headCount", 
+			"cost", /*"venue", "florist", "caterer","musician", "photographer"*/})
+	public Wedding wedding;
 	
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_type_id")
-//	public UserTypes userType;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_type")
+	@JsonIgnoreProperties(value= {"users", "id"})
+	public UserType userType;
 
 	public User() {
 		super();
@@ -70,38 +66,46 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String name, String email, String username, String password, UserTypes userType) {
+	public User(String name, String email, String username, String password, UserType userType) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-//		this.userType = userType;
+		this.userType = userType;
+	}
+	public User(String name, String email, String username, String password, MealType mealChoice) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.mealChoice = mealChoice;
 	}
 
-	public User(int id, String name, String email, String username, String password, UserTypes userType) {
+	public User(int id, String name, String email, String username, String password, UserType userType) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-//		this.userType = userType;
+		this.userType = userType;
 	}
 
-	public User(int id, String name, String email, String username, String password, MealTypes mealChoice,
-			boolean plusOne, boolean attending, UserTypes userType, Wedding wedding) {
+	public User(int id, String name, String email, String username, String password, MealType mealChoice,
+			boolean plusOne, boolean attending, UserType userType, Wedding wedding) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-//		this.mealChoice = mealChoice;
+		this.mealChoice = mealChoice;
 		this.plusOne = plusOne;
 		this.attending = attending;
-//		this.userType = userType;
-//		this.wedding = wedding;
+		this.userType = userType;
+		this.wedding = wedding;
 	}
 
 	public int getId() {
@@ -144,13 +148,13 @@ public class User {
 		this.password = password;
 	}
 
-//	public MealTypes getMealChoice() {
-//		return mealChoice;
-//	}
-//
-//	public void setMealChoice(MealTypes mealChoice) {
-//		this.mealChoice = mealChoice;
-//	}
+	public MealType getMealChoice() {
+		return mealChoice;
+	}
+
+	public void setMealChoice(MealType mealChoice) {
+		this.mealChoice = mealChoice;
+	}
 
 	public boolean isPlusOne() {
 		return plusOne;
@@ -168,46 +172,46 @@ public class User {
 		this.attending = attending;
 	}
 
-//	public UserTypes getUserType() {
-//		return userType;
-//	}
-//
-//	public void setUserType(UserTypes userType) {
-//		this.userType = userType;
-//	}
-//
-//	public Wedding getWeddingId() {
-//		return wedding;
-//	}
-//
-//	public void setWedding(Wedding wedding) {
-//		this.wedding = wedding;
-//	}
+	public UserType getUserType() {
+		return userType;
+	}
 
-//	@Override
-//	public String toString() {
-//		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
-//				+ ", userType=" + userType + "]";
-//	}
-//
-//	@Override
-//	public int hashCode() {
-//		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		User other = (User) obj;
-//		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-//				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
-//				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
-//				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
-//	}
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
+	public Wedding getWeddingId() {
+		return wedding;
+	}
+
+	public void setWedding(Wedding wedding) {
+		this.wedding = wedding;
+	}
+
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", email=" + email + ", username=" + username + ", mealChoice=" + mealChoice + ", plusOne=" + plusOne + ", attending=" + attending
+				+ ", userType=" + userType + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(attending, email, id, mealChoice, name, password, plusOne, userType, username, wedding);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return attending == other.attending && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(mealChoice, other.mealChoice) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && plusOne == other.plusOne && userType == other.userType
+				&& Objects.equals(username, other.username) && Objects.equals(wedding, other.wedding);
+	}
 
 }

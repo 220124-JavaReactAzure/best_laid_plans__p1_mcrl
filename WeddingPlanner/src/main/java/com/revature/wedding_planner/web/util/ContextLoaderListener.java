@@ -16,21 +16,21 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.wedding_planner.daos.WeddingDAO;
-import com.revature.wedding_planner.daos.MealTypesDAO;
+import com.revature.wedding_planner.daos.MealTypeDAO;
 import com.revature.wedding_planner.daos.UserDAO;
-import com.revature.wedding_planner.daos.UserTypesDAO;
+import com.revature.wedding_planner.daos.UserTypeDAO;
 import com.revature.wedding_planner.daos.VendorDAO;
 import com.revature.wedding_planner.daos.VendorTypesDAO;
 import com.revature.wedding_planner.services.WeddingService;
-import com.revature.wedding_planner.services.MealTypesService;
+import com.revature.wedding_planner.services.MealTypeService;
 import com.revature.wedding_planner.services.UserService;
-import com.revature.wedding_planner.services.UserTypesService;
+import com.revature.wedding_planner.services.UserTypeService;
 import com.revature.wedding_planner.services.VendorService;
 import com.revature.wedding_planner.services.VendorTypesService;
 import com.revature.wedding_planner.web.servlets.AuthServlet;
-import com.revature.wedding_planner.web.servlets.MealTypesServlet;
+import com.revature.wedding_planner.web.servlets.MealTypeServlet;
 import com.revature.wedding_planner.web.servlets.UserServlet;
-import com.revature.wedding_planner.web.servlets.UserTypesServlet;
+import com.revature.wedding_planner.web.servlets.UserTypeServlet;
 import com.revature.wedding_planner.web.servlets.VendorServlet;
 import com.revature.wedding_planner.web.servlets.VendorTypesServlet;
 import com.revature.wedding_planner.web.servlets.WeddingServlet;
@@ -50,24 +50,24 @@ public class ContextLoaderListener implements ServletContextListener{
 		UserDAO userDAO = new UserDAO();
 		WeddingDAO weddingDAO = new WeddingDAO();
 		VendorDAO vendorDAO = new VendorDAO();
-		MealTypesDAO mealTypesDAO = new MealTypesDAO();
+		MealTypeDAO mealTypesDAO = new MealTypeDAO();
 		VendorTypesDAO vendorTypesDAO = new VendorTypesDAO();
-		UserTypesDAO userTypesDAO = new UserTypesDAO();
+		UserTypeDAO userTypesDAO = new UserTypeDAO();
 		
 		UserService userService = new UserService(userDAO);
-		WeddingService weddingService = new WeddingService(weddingDAO, userService);
+		WeddingService weddingService = new WeddingService(weddingDAO);
 		VendorService vendorService = new VendorService(vendorDAO);
 		VendorTypesService vendorTypesService = new VendorTypesService(vendorTypesDAO);
-		MealTypesService mealTypesService = new MealTypesService(mealTypesDAO);
-		UserTypesService userTypesService = new UserTypesService(userTypesDAO);
+		MealTypeService mealTypesService = new MealTypeService(mealTypesDAO);
+		UserTypeService userTypesService = new UserTypeService(userTypesDAO);
 		//TODO activate remaining services/daos
 		
 		WeddingServlet weddingServlet = new WeddingServlet(weddingService, mapper);
 		UserServlet userServlet = new UserServlet(userService, mapper);
 		VendorServlet vendorServlet = new VendorServlet(vendorService, mapper);
 		VendorTypesServlet vendorTypesServlet = new VendorTypesServlet(vendorTypesService, mapper);
-		MealTypesServlet mealTypesServlet = new MealTypesServlet(mealTypesService, mapper);
-		UserTypesServlet userTypesServlet = new UserTypesServlet(userTypesService, mapper);
+		MealTypeServlet mealTypesServlet = new MealTypeServlet(mealTypesService, mapper);
+		UserTypeServlet userTypesServlet = new UserTypeServlet(userTypesService, mapper);
 		
 		//AuthServlet authServlet = new AuthServlet(userService, mapper);
 		//TODO initiate remaining servlets
