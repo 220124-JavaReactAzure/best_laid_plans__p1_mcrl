@@ -73,4 +73,9 @@ public class UserTypeService {
 
 	}
 
+	public List<UserType> getAllUsersByType(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -57,64 +57,64 @@ public class UserServlet extends HttpServlet {
 				resp.setStatus(400);
 			}
 			break;
-		//TODO
-		case "/attendees":
-			try {
-				List<User> users = userService.getAllUsersByType("attendee");
-				if (users == null) {
-					writer.write("Retrieval by userType not fully implemented yet");
-					resp.setStatus(500);
-					return;
-				}
-				String payload = mapper.writeValueAsString(users);
-				writer.write(payload);
-				resp.setStatus(200);
-			} catch (StreamReadException | DatabindException e) {
-				resp.setStatus(400);
-			}
-
-			writer.write("All attendees: ");
-			resp.setStatus(200);
-			break;
-		//TODO
-		case "/betrothed":
-			try {
-				List<User> users = userService.getAllUsersByType("betrothed");
-				if (users == null) {
-				writer.write("Retrieval by userType not fully implemented yet");
-					resp.setStatus(500);
-					return;
-				}
-				String payload = mapper.writeValueAsString(users);
-				writer.write(payload);
-				resp.setStatus(200);
-			} catch (StreamReadException | DatabindException e) {
-				resp.setStatus(400);
-			}
-
-			writer.write("All betrothed: ");
-			resp.setStatus(200);
-			break;
-		//TODO
-		case "/staff":
-			try {
-				
-				List<User> users = userService.getAllUsersByType("staff");
-				if (users == null) {
-					writer.write("Retrieval by userType not fully implemented yet");
-					resp.setStatus(500);
-					return;
-				}
-				String payload = mapper.writeValueAsString(users);
-				writer.write(payload);
-				resp.setStatus(200);
-			} catch (StreamReadException | DatabindException e) {
-				resp.setStatus(400);
-			}
-
-			writer.write("All staff: ");
-			resp.setStatus(200);
-			break;
+//		//TODO
+//		case "/attendees":
+//			try {
+//				List<User> users = userService.getAllUsersByType("attendee");
+//				if (users == null) {
+//					writer.write("Retrieval by userType not fully implemented yet");
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(users);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+//
+//			writer.write("All attendees: ");
+//			resp.setStatus(200);
+//			break;
+//		//TODO
+//		case "/betrothed":
+//			try {
+//				List<User> users = userService.getAllUsersByType("betrothed");
+//				if (users == null) {
+//				writer.write("Retrieval by userType not fully implemented yet");
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(users);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+//
+//			writer.write("All betrothed: ");
+//			resp.setStatus(200);
+//			break;
+//		//TODO
+//		case "/staff":
+//			try {
+//				
+//				List<User> users = userService.getAllUsersByType("staff");
+//				if (users == null) {
+//					writer.write("Retrieval by userType not fully implemented yet");
+//					resp.setStatus(500);
+//					return;
+//				}
+//				String payload = mapper.writeValueAsString(users);
+//				writer.write(payload);
+//				resp.setStatus(200);
+//			} catch (StreamReadException | DatabindException e) {
+//				resp.setStatus(400);
+//			}
+//
+//			writer.write("All staff: ");
+//			resp.setStatus(200);
+//			break;
 		default:
 			List<User> users = userService.getAllUsers();
 			String payload = mapper.writeValueAsString(users);

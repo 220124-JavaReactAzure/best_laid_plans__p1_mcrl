@@ -15,28 +15,92 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.wedding_planner.models.UserType;
 import com.revature.wedding_planner.services.UserTypeService;
 
-public class UserTypeServlet extends HttpServlet{
+public class UserTypeServlet extends HttpServlet {
 
-	private final UserTypeService userTypesService;
+	private final UserTypeService userTypeService;
 	private final ObjectMapper mapper;
 
-	public UserTypeServlet(UserTypeService userTypesService, ObjectMapper mapper) {
+	public UserTypeServlet(UserTypeService userTypeService, ObjectMapper mapper) {
 		super();
-		this.userTypesService = userTypesService;
+		this.userTypeService = userTypeService;
 		this.mapper = mapper;
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter writer = resp.getWriter();
+		String path = req.getPathInfo();
+		if (path == null)
+			path = "";
+		switch (path) {
+		// TODO
+		case "/attendees":
+			try {
+				List<UserType> users = userTypeService.getAllUsersByType("attendee");
+				if (users == null) {
+					writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
 
-		try {
-			List<UserType> userTypes = userTypesService.getAllUserTypes();
-			String payload = mapper.writeValueAsString(userTypes);
-			writer.write(payload);
+			writer.write("All attendees: ");
 			resp.setStatus(200);
-		} catch (StreamReadException | DatabindException e) {
-			resp.setStatus(400);
+			break;
+		// TODO
+		case "/betrothed":
+			try {
+				List<UserType> users = userTypeService.getAllUsersByType("betrothed");
+				if (users == null) {
+					writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
+
+			writer.write("All betrothed: ");
+			resp.setStatus(200);
+			break;
+		// TODO
+		case "/staff":
+			try {
+
+				List<UserType> users = userTypeService.getAllUsersByType("staff");
+				if (users == null) {
+					writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
+
+			writer.write("All staff: ");
+			resp.setStatus(200);
+			break;
+		default:
+			try {
+				List<UserType> userTypes = userTypeService.getAllUserTypes();
+				String payload = mapper.writeValueAsString(userTypes);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
+			break;
 		}
 	}
 
@@ -45,7 +109,7 @@ public class UserTypeServlet extends HttpServlet{
 		resp.setContentType("application/json");
 		try {
 			UserType newUserType = mapper.readValue(req.getInputStream(), UserType.class);
-			boolean wasReg = userTypesService.addUserType(newUserType);
+			boolean wasReg = userTypeService.addUserType(newUserType);
 			if (wasReg) {
 				resp.setStatus(201);
 			} else {
@@ -67,7 +131,7 @@ public class UserTypeServlet extends HttpServlet{
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			UserType updatedUserType = mapper.readValue(req.getInputStream(), UserType.class);
-			userTypesService.updateUserType(updatedUserType);
+			userTypeService.updateUserType(updatedUserType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -84,7 +148,7 @@ public class UserTypeServlet extends HttpServlet{
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			UserType deletedUserType = mapper.readValue(req.getInputStream(), UserType.class);
-			userTypesService.deleteUserType(deletedUserType);
+			userTypeService.deleteUserType(deletedUserType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
