@@ -111,4 +111,9 @@ public class UserService {
 	public boolean deleteUser(User user) {
 		return userDAO.delete(user);
 	}
+
+	public List<User> getAllUsersByType(String userType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

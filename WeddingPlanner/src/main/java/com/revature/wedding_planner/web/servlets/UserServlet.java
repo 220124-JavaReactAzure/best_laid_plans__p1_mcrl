@@ -20,7 +20,7 @@ import com.revature.wedding_planner.services.UserService;
 public class UserServlet extends HttpServlet {
 	private final UserService userService;
 	private final ObjectMapper mapper;
-	static Logger logger;
+
 	public UserServlet(UserService userService, ObjectMapper mapper) {
 		super();
 		this.userService = userService;
@@ -30,7 +30,6 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter writer = resp.getWriter();
-		// Obtains everything after the /users
 		String path = req.getPathInfo();
 		if (path == null)
 			path = "";
@@ -60,83 +59,60 @@ public class UserServlet extends HttpServlet {
 			break;
 		//TODO
 		case "/attendees":
-//			try {
-//				String idParam = req.getParameter("username");
-//				if (idParam == null) {
-//					resp.setStatus(400);
-//					writer.write("Please include the query ?username=# in your url");
-//					return;
-//				}
-//
-//				String userId = idParam;
-//
-//				User user = userService.getUserByID(userId);
-//				if (user == null) {
-//					resp.setStatus(500);
-//					return;
-//				}
-//				String payload = mapper.writeValueAsString(user);
-//				writer.write(payload);
-//				resp.setStatus(200);
-//			} catch (StreamReadException | DatabindException e) {
-//				resp.setStatus(400);
-//			}
+			try {
+				List<User> users = userService.getAllUsersByType("attendee");
+				if (users == null) {
+					writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
 
-			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			writer.write("All attendees: ");
 			resp.setStatus(200);
 			break;
 		//TODO
 		case "/betrothed":
-//			try {
-//				String idParam = req.getParameter("username");
-//				if (idParam == null) {
-//					resp.setStatus(400);
-//					writer.write("Please include the query ?username=# in your url");
-//					return;
-//				}
-//
-//				String userId = idParam;
-//
-//				User user = userService.getUserByID(userId);
-//				if (user == null) {
-//					resp.setStatus(500);
-//					return;
-//				}
-//				String payload = mapper.writeValueAsString(user);
-//				writer.write(payload);
-//				resp.setStatus(200);
-//			} catch (StreamReadException | DatabindException e) {
-//				resp.setStatus(400);
-//			}
+			try {
+				List<User> users = userService.getAllUsersByType("betrothed");
+				if (users == null) {
+				writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
 
-			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			writer.write("All betrothed: ");
 			resp.setStatus(200);
 			break;
 		//TODO
 		case "/staff":
-//			try {
-//				String idParam = req.getParameter("username");
-//				if (idParam == null) {
-//					resp.setStatus(400);
-//					writer.write("Please include the query ?username=# in your url");
-//					return;
-//				}
-//
-//				String userId = idParam;
-//
-//				User user = userService.getUserByID(userId);
-//				if (user == null) {
-//					resp.setStatus(500);
-//					return;
-//				}
-//				String payload = mapper.writeValueAsString(user);
-//				writer.write(payload);
-//				resp.setStatus(200);
-//			} catch (StreamReadException | DatabindException e) {
-//				resp.setStatus(400);
-//			}
+			try {
+				
+				List<User> users = userService.getAllUsersByType("staff");
+				if (users == null) {
+					writer.write("Retrieval by userType not fully implemented yet");
+					resp.setStatus(500);
+					return;
+				}
+				String payload = mapper.writeValueAsString(users);
+				writer.write(payload);
+				resp.setStatus(200);
+			} catch (StreamReadException | DatabindException e) {
+				resp.setStatus(400);
+			}
 
-			writer.write("'User Types' not fully implemented yet, and may need its own servlet");
+			writer.write("All staff: ");
 			resp.setStatus(200);
 			break;
 		default:
