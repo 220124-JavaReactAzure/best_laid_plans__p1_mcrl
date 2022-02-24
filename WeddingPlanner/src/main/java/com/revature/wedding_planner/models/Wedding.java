@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="wedding")
+@Table(name = "wedding")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Wedding {
 	@Id
@@ -35,34 +35,34 @@ public class Wedding {
 	private int headCount;
 	@Column(name = "cost")
 	private double cost;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_venue")
-	@JsonIgnoreProperties(value= {"weddings", "id"})
-	public Vendor venue;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_florist")
-	@JsonIgnoreProperties(value= {"weddings", "id"})
-	public Vendor florist;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_caterer")
-	@JsonIgnoreProperties(value= {"weddings", "id"})
-	public Vendor caterer;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_musician")
-	@JsonIgnoreProperties(value= {"weddings", "id"})
-	public Vendor musician;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "wedding_photographer")
-	@JsonIgnoreProperties(value= {"weddings", "id"})
-	public Vendor photographer;
-	
-	@OneToMany(mappedBy="wedding", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="wedding")
+
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_venue")
+//	@JsonIgnoreProperties(value= {"weddings", "id"})
+//	public Vendor venue;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_florist")
+//	@JsonIgnoreProperties(value= {"weddings", "id"})
+//	public Vendor florist;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_caterer")
+//	@JsonIgnoreProperties(value= {"weddings", "id"})
+//	public Vendor caterer;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_musician")
+//	@JsonIgnoreProperties(value= {"weddings", "id"})
+//	public Vendor musician;
+//	
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "wedding_photographer")
+//	@JsonIgnoreProperties(value= {"weddings", "id"})
+//	public Vendor photographer;
+
+	@OneToMany(mappedBy = "wedding", fetch = FetchType.EAGER)
+	@JsonIgnoreProperties(value = "wedding")
 	private List<User> users;
 
 	public Wedding() {
@@ -75,20 +75,30 @@ public class Wedding {
 		this.name = name;
 	}
 
-	public Wedding(int id, String date, String name, int headCount, double cost, Vendor venue, Vendor florist, Vendor caterer,
-			Vendor musician, Vendor photographer) {
+	public Wedding(int id, String date, String name, int headCount, double cost, List<User> users) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.name = name;
 		this.headCount = headCount;
 		this.cost = cost;
-		this.venue = venue;
-		this.florist = florist;
-		this.caterer = caterer;
-		this.musician = musician;
-		this.photographer = photographer;
+		this.users = users;
 	}
+
+//	public Wedding(int id, String date, String name, int headCount, double cost, Vendor venue, Vendor florist, Vendor caterer,
+//			Vendor musician, Vendor photographer) {
+//		super();
+//		this.id = id;
+//		this.date = date;
+//		this.name = name;
+//		this.headCount = headCount;
+//		this.cost = cost;
+//		this.venue = venue;
+//		this.florist = florist;
+//		this.caterer = caterer;
+//		this.musician = musician;
+//		this.photographer = photographer;
+//	}
 
 	public int getId() {
 		return id;
@@ -130,45 +140,45 @@ public class Wedding {
 		this.cost = cost;
 	}
 
-	public Vendor getVenue() {
-		return venue;
-	}
-
-	public void setVenue(Vendor venue) {
-		this.venue = venue;
-	}
-
-	public Vendor getFlorist() {
-		return florist;
-	}
-
-	public void setFlorist(Vendor florist) {
-		this.florist = florist;
-	}
-
-	public Vendor getCaterer() {
-		return caterer;
-	}
-
-	public void setCaterer(Vendor caterer) {
-		this.caterer = caterer;
-	}
-
-	public Vendor getMusician() {
-		return musician;
-	}
-
-	public void setMusician(Vendor musician) {
-		this.musician = musician;
-	}
-
-	public Vendor getPhotographer() {
-		return photographer;
-	}
-
-	public void setPhotographer(Vendor photographer) {
-		this.photographer = photographer;
-	}
+//	public Vendor getVenue() {
+//		return venue;
+//	}
+//
+//	public void setVenue(Vendor venue) {
+//		this.venue = venue;
+//	}
+//
+//	public Vendor getFlorist() {
+//		return florist;
+//	}
+//
+//	public void setFlorist(Vendor florist) {
+//		this.florist = florist;
+//	}
+//
+//	public Vendor getCaterer() {
+//		return caterer;
+//	}
+//
+//	public void setCaterer(Vendor caterer) {
+//		this.caterer = caterer;
+//	}
+//
+//	public Vendor getMusician() {
+//		return musician;
+//	}
+//
+//	public void setMusician(Vendor musician) {
+//		this.musician = musician;
+//	}
+//
+//	public Vendor getPhotographer() {
+//		return photographer;
+//	}
+//
+//	public void setPhotographer(Vendor photographer) {
+//		this.photographer = photographer;
+//	}
 
 	public List<User> getUsers() {
 		return users;
@@ -178,32 +188,31 @@ public class Wedding {
 		this.users = users;
 	}
 
-	@Override
-	public String toString() {
-		return "Wedding [date=" + date + ", name=" + name + ", headCount=" + headCount + ", cost=" + cost + ", venue="
-				+ venue + ", florist=" + florist + ", caterer=" + caterer + ", musician=" + musician + ", photographer="
-				+ photographer + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Wedding [date=" + date + ", name=" + name + ", headCount=" + headCount + ", cost=" + cost + ", venue="
+//				+ venue + ", florist=" + florist + ", caterer=" + caterer + ", musician=" + musician + ", photographer="
+//				+ photographer + "]";
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(caterer, cost, date, florist, headCount, id, musician, name, photographer, users, venue);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Wedding other = (Wedding) obj;
+//		return caterer == other.caterer && Double.doubleToLongBits(cost) == Double.doubleToLongBits(other.cost)
+//				&& Objects.equals(date, other.date) && florist == other.florist && headCount == other.headCount
+//				&& id == other.id && musician == other.musician && Objects.equals(name, other.name)
+//				&& photographer == other.photographer && Objects.equals(users, other.users) && venue == other.venue;
+//	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(caterer, cost, date, florist, headCount, id, musician, name, photographer, users, venue);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Wedding other = (Wedding) obj;
-		return caterer == other.caterer && Double.doubleToLongBits(cost) == Double.doubleToLongBits(other.cost)
-				&& Objects.equals(date, other.date) && florist == other.florist && headCount == other.headCount
-				&& id == other.id && musician == other.musician && Objects.equals(name, other.name)
-				&& photographer == other.photographer && Objects.equals(users, other.users) && venue == other.venue;
-	}
-	
-	
 }

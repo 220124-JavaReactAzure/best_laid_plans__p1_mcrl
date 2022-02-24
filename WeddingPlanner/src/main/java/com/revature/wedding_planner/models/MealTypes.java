@@ -29,9 +29,9 @@ public class MealTypes {
 	private String mealType;
 	
 
-//	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
-//	@JsonIgnoreProperties(value="mealChoice")
-//	private List<User> users;
+	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties(value="mealChoice")
+	private List<User> users;
 	
 	public MealTypes() {
 		super();
@@ -48,12 +48,12 @@ public class MealTypes {
 		this.mealType = mealType;
 	}
 
-//	public MealTypes(int id, String mealType, List<User> users) {
-//		super();
-//		this.id = id;
-//		this.mealType = mealType;
-//		this.users = users;
-//	}
+	public MealTypes(int id, String mealType, List<User> users) {
+		super();
+		this.id = id;
+		this.mealType = mealType;
+		this.users = users;
+	}
 
 	public int getId() {
 		return id;
@@ -71,35 +71,35 @@ public class MealTypes {
 		this.mealType = mealType;
 	}
 
-//	public List<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 	@Override
 	public String toString() {
 		return "[mealType=" + mealType + "]";
 	}
 
-//	@Override
-//	public int hashCode() {
-//		return Objects.hash(id, mealType, users);
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		MealTypes other = (MealTypes) obj;
-//		return id == other.id && Objects.equals(mealType, other.mealType) && Objects.equals(users, other.users);
-//	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, mealType, users);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MealTypes other = (MealTypes) obj;
+		return id == other.id && Objects.equals(mealType, other.mealType) && Objects.equals(users, other.users);
+	}
 	
 	
 }

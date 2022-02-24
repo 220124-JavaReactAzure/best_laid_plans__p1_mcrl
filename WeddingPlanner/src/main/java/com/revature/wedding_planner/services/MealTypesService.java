@@ -12,7 +12,7 @@ public class MealTypesService {
 	private final MealTypesDAO mealTypesDAO;
 	
 	public MealTypesService(MealTypesDAO mealTypesDAO) {
-		this.mealTypesDAO = new MealTypesDAO();
+		this.mealTypesDAO = mealTypesDAO;
 	}
 	
 	public boolean addMealType(MealTypes mealType) {

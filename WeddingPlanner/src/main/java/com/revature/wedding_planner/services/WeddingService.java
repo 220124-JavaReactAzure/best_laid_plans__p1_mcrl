@@ -12,7 +12,7 @@ public class WeddingService {
 private final WeddingDAO weddingDAO;
 	
 	public WeddingService(WeddingDAO weddingDAO) {
-		this.weddingDAO = new WeddingDAO();
+		this.weddingDAO = weddingDAO;
 	}
 	
 	public boolean addWedding(Wedding wedding) {

@@ -1,5 +1,6 @@
 package com.revature.wedding_planner.services;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,6 +20,7 @@ import org.mockito.Mock;
 
 import com.revature.wedding_planner.daos.MealTypesDAO;
 import com.revature.wedding_planner.models.MealTypes;
+import com.revature.wedding_planner.util.datasource.HibernateUtil;
 import com.revature.wedding_planner.exceptions.InvalidRequestException;
 import com.revature.wedding_planner.exceptions.ResourcePersistenceException;
 
@@ -53,8 +56,7 @@ public class MealTypesServiceTestSuite {
 	public void test_addMealType_throwsResourcePersistenceException_givenDuplicateMealType() {
 		MealTypes duplicateMealType = new MealTypes("valid");
 
-		when(mockMealTypesDAO.findByMealType(duplicateMealType.getMealType())).thenReturn(duplicateMealType);
-		when(mockMealTypesDAO.create(duplicateMealType)).thenReturn(duplicateMealType);
+		when(mockMealTypesDAO.create(duplicateMealType)).thenReturn(null);
 
 		boolean actualResult = sut.addMealType(duplicateMealType);
 
@@ -76,12 +78,10 @@ public class MealTypesServiceTestSuite {
 	}
 	@Test(expected = InvalidRequestException.class)
 	public void test_updateMealType_throwsInvalidRequestException_givenInvalidMealType() {
-		//TODid less, also catching invalid request in case of null mealtype param
 		sut.updateMealType(null);
 	}
 	@Test(expected = ResourcePersistenceException.class)
 	public void test_updateMealType_throwsResourcePersistenceException_givenInvalidMealType() {
-		//TODid added resource persistance catch case for update
 		MealTypes invalidMealType = new MealTypes("invalid");
 		when(mockMealTypesDAO.update(invalidMealType)).thenReturn(false);
 		

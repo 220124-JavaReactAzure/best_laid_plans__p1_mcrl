@@ -12,7 +12,7 @@ public class UserTypesService {
 	private final UserTypesDAO userTypesDAO;
 
 	public UserTypesService(UserTypesDAO userTypesDAO) {
-		this.userTypesDAO = new UserTypesDAO();
+		this.userTypesDAO = userTypesDAO;
 	}
 
 	public boolean addUserType(UserTypes userType) {
