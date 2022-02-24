@@ -120,11 +120,10 @@ public class WeddingDAO {
 		}
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(Wedding deletedWedding) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			Wedding deletedWedding = this.findById(id);
 			session.delete(deletedWedding);
 			transaction.commit();
 			return true;

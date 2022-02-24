@@ -75,6 +75,13 @@ public class Wedding {
 		this.name = name;
 	}
 
+	public Wedding(int id, String date, String name) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.name = name;
+	}
+
 	public Wedding(int id, String date, String name, int headCount, double cost, List<User> users) {
 		super();
 		this.id = id;

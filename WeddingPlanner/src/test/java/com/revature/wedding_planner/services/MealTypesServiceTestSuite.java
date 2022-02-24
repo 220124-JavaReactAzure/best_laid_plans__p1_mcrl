@@ -1,6 +1,5 @@
 package com.revature.wedding_planner.services;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -10,17 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
+
 import org.junit.Test;
-import org.mockito.Mock;
+
 
 import com.revature.wedding_planner.daos.MealTypesDAO;
 import com.revature.wedding_planner.models.MealTypes;
-import com.revature.wedding_planner.util.datasource.HibernateUtil;
 import com.revature.wedding_planner.exceptions.InvalidRequestException;
 import com.revature.wedding_planner.exceptions.ResourcePersistenceException;
 

@@ -30,6 +30,9 @@ private final WeddingDAO weddingDAO;
 	}
 	
 	public Wedding updateWedding(Wedding updatedWedding) {
+		if(!isValidWedding(updatedWedding)) {
+			throw new InvalidRequestException("Invalid mealType data provided");
+		}
 		if (!weddingDAO.update(updatedWedding)) {
 			throw new ResourcePersistenceException("Failure updating Wedding.");
 		}
@@ -56,8 +59,8 @@ private final WeddingDAO weddingDAO;
 		}
 	}
 	
-	public void deleteWedding(Wedding wedding) {
-		weddingDAO.delete(wedding.getId());
+	public boolean deleteWedding(Wedding wedding) {
+		return weddingDAO.delete(wedding);
 	}
 	public boolean isValidWedding(Wedding wedding) {
 		// TODO expand validity checking
