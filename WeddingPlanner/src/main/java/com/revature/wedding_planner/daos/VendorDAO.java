@@ -2,7 +2,7 @@ package com.revature.wedding_planner.daos;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
+
 
 import javax.persistence.Query;
 
@@ -10,11 +10,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.wedding_planner.models.User;
+
 import com.revature.wedding_planner.models.Vendor;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class VendorDAO implements CrudDAO<Vendor>{
+public abstract class VendorDAO implements CrudDAO<Vendor>{
 	@Override
 	public Vendor create(Vendor newVendor) {
 		try {
@@ -52,7 +52,7 @@ public class VendorDAO implements CrudDAO<Vendor>{
 	}
 
 	@Override
-	public Vendor findById(String id) {
+	public Vendor findById(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Vendor foundVendor = session.get(Vendor.class, id); 
@@ -102,7 +102,7 @@ public class VendorDAO implements CrudDAO<Vendor>{
 	}
 
 	@Override
-	public boolean delete(String id) {
+	public boolean delete(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();

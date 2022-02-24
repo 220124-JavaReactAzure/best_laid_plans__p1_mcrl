@@ -2,7 +2,6 @@ package com.revature.wedding_planner.services;
 
 
 import com.revature.wedding_planner.models.Vendor;
-
 import com.revature.wedding_planner.daos.VendorDAO;
 
 import com.revature.wedding_planner.exceptions.AuthenticationException;
@@ -24,24 +23,10 @@ public class VendorService {
 			throw new InvalidRequestException("Invalid vendor data provided");
 		}
 
-//		// logic that verifies the new users information isn't duplicated in the system
-//		boolean usernameAvailable = userDAO.findByUsername(newUser.getUsername()) == null;
-//		boolean emailAvailable = userDAO.findByEmail(newUser.getEmail()) == null;
-//
-//		if (!usernameAvailable || !emailAvailable) {
-//			if (emailAvailable) {
-//				throw new ResourcePersistenceException("The provided username was already taken in the database");
-//			} else if (usernameAvailable) {
-//				throw new ResourcePersistenceException("The provided email was already taken in the database");
-//			} else {
-//				throw new ResourcePersistenceException(
-//						"The provided username and email were already taken in the database");
-//			}
-//		}
 
-		Vendor persistedUser = vendorDAO.create(newVendor);
+		Vendor persistedVendor = vendorDAO.create(newVendor);
 
-		if (persistedUser == null) {
+		if (persistedVendor == null) {
 			throw new ResourcePersistenceException("The user could not be persisted");
 		}
 
@@ -80,7 +65,7 @@ public class VendorService {
 		return updatedVendor;
 	}
 
-	public Vendor getVendorByID(String vendorId) {
+	public Vendor getVendorByID(int vendorId) {
 
 		Vendor foundVendor = vendorDAO.findById(vendorId);
 
@@ -101,7 +86,7 @@ public class VendorService {
 		}
 	}
 	
-	public void deleteUser(Vendor vendor) {
-//		vendorDAO.delete(vendor.getId());
+	public void deleteVendor(Vendor vendor) {
+		vendorDAO.delete(vendor.getId());
 	}
 }

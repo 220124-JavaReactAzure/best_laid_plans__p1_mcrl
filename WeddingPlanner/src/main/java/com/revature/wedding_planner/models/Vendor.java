@@ -35,7 +35,7 @@ public class Vendor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "vendor_id", unique = true, nullable = false)
-	private int id;
+	private int vendId;
 	
 	@Column(name = "vendor_name")
 	private String vendorName;
@@ -43,7 +43,7 @@ public class Vendor {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "vendor_type_id")
 	@JsonIgnoreProperties(value= {"vendors", "id"})
-	public VendorTypes vendortype;
+	public VendorType vendortype;
 
 	
 	@Column(name = "vendor_cost")
@@ -60,9 +60,9 @@ public class Vendor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vendor(int id, String name, VendorTypes vendortype, double cost, Date availBeginDate, Date availEndDate) {
+	public Vendor(int id, String name, VendorType vendortype, double cost, Date availBeginDate, Date availEndDate) {
 		super();
-		this.id = id;
+		this.vendId = id;
 		this.vendorName = name;
 		this.vendortype = vendortype;
 		this.cost = cost;
@@ -71,11 +71,11 @@ public class Vendor {
 	}
 
 	public int getId() {
-		return id;
+		return vendId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.vendId = id;
 	}
 
 	public String getName() {
@@ -86,11 +86,11 @@ public class Vendor {
 		this.vendorName = name;
 	}
 
-	public VendorTypes getVendortype() {
+	public VendorType getVendortype() {
 		return vendortype;
 	}
 
-	public void setVendortype(VendorTypes vendortype) {
+	public void setVendortype(VendorType vendortype) {
 		this.vendortype = vendortype;
 	}
 

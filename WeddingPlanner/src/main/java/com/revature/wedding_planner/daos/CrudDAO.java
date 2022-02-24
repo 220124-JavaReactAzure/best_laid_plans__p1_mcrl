@@ -2,6 +2,8 @@ package com.revature.wedding_planner.daos;
 
 import java.util.List;
 
+import com.revature.wedding_planner.models.Vendor;
+
 public interface CrudDAO<T> {
 
 	// CRUD: Create, Read, Update, Delete
@@ -11,11 +13,14 @@ public interface CrudDAO<T> {
 	
 	// Read
 	List<T> findAll();
-	T findById(String id);
+	T findById(int id);
 	
 	// Update
 	boolean update(T updatedObj);
 	
 	// Delete
 	boolean delete(String id);
+	boolean delete(int id);
+
+
 }
