@@ -1,6 +1,5 @@
 package com.revature.wedding_planner.models;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -17,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -117,9 +117,5 @@ public class Vendor {
 	public void setAvailEndDate(Date availEndDate) {
 		this.availEndDate = availEndDate;
 	}
-	
 
-	
-	
-	
 }

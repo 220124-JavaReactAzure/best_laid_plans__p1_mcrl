@@ -12,18 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.wedding_planner.models.UserType;
-import com.revature.wedding_planner.models.Wedding;
-import com.revature.wedding_planner.services.WeddingService;
+import com.revature.wedding_planner.models.MealType;
+import com.revature.wedding_planner.services.MealTypeService;
 
-public class WeddingServlet extends HttpServlet{
+public class MealTypeServlet extends HttpServlet {
 
-	private final WeddingService weddingService;
+	private final MealTypeService mealTypesService;
 	private final ObjectMapper mapper;
 
-	public WeddingServlet(WeddingService weddingService, ObjectMapper mapper) {
+	public MealTypeServlet(MealTypeService mealTypesService, ObjectMapper mapper) {
 		super();
-		this.weddingService = weddingService;
+		this.mealTypesService = mealTypesService;
 		this.mapper = mapper;
 	}
 
@@ -32,12 +31,12 @@ public class WeddingServlet extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 
 		try {
-			//TODO add parameterized options for specific weddings
-			List<Wedding> weddings = weddingService.getAllWeddings();
+			List<MealType> mealTypes = mealTypesService.getAllMealTypes();
 			String payload = "";
-			for (Wedding wedding: weddings) {
-				payload += mapper.writeValueAsString(wedding.getName());
+			for (MealType mealType: mealTypes) {
+				payload += mapper.writeValueAsString(mealType.getMealType());
 			}
+			
 			writer.write(payload);
 			resp.setStatus(200);
 		} catch (StreamReadException | DatabindException e) {
@@ -49,13 +48,13 @@ public class WeddingServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
 		try {
-			Wedding newWedding = mapper.readValue(req.getInputStream(), Wedding.class);
-			boolean wasReg = weddingService.addWedding(newWedding);
+			MealType newMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			boolean wasReg = mealTypesService.addMealType(newMealType);
 			if (wasReg) {
 				resp.setStatus(201);
 			} else {
 				resp.setStatus(500);
-				resp.getWriter().write("Database did not persist new wedding.");
+				resp.getWriter().write("Database did not persist new mealType.");
 			}
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -63,7 +62,7 @@ public class WeddingServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist wedding.");
+			resp.getWriter().write("Some other random exception--did not persist mealType.");
 			e.printStackTrace();
 		}
 	}
@@ -71,8 +70,8 @@ public class WeddingServlet extends HttpServlet{
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			Wedding updatedWedding = mapper.readValue(req.getInputStream(), Wedding.class);
-			weddingService.updateWedding(updatedWedding);
+			MealType updatedMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			mealTypesService.updateMealType(updatedMealType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -80,7 +79,7 @@ public class WeddingServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist wedding update.");
+			resp.getWriter().write("Some other random exception--did not persist mealType update.");
 			e.printStackTrace();
 		}
 	}
@@ -88,8 +87,8 @@ public class WeddingServlet extends HttpServlet{
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			Wedding deletedWedding = mapper.readValue(req.getInputStream(), Wedding.class);
-			weddingService.deleteWedding(deletedWedding);
+			MealType deletedMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			mealTypesService.deleteMealType(deletedMealType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -97,8 +96,9 @@ public class WeddingServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist wedding deletion.");
+			resp.getWriter().write("Some other random exception--did not persist mealType deletion.");
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -78,6 +78,9 @@ public class UserService {
 	}
 
 	public User updateUser(User updatedUser) {
+		if (!isValidUser(updatedUser)) {
+			throw new InvalidRequestException("Invalid user data provided");
+		}
 		if (!userDAO.update(updatedUser)) {
 			throw new ResourcePersistenceException("Failure updating user.");
 		}
@@ -105,7 +108,12 @@ public class UserService {
 		}
 	}
 	
-	public void deleteUser(User user) {
-		userDAO.delete(user.getId());
+	public boolean deleteUser(User user) {
+		return userDAO.delete(user);
+	}
+
+	public List<User> getAllUsersByType(String userType) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

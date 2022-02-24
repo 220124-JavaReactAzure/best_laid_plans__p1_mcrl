@@ -1,7 +1,8 @@
 package com.revature.wedding_planner.daos;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Query;
 
@@ -12,11 +13,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.wedding_planner.models.User;
-import com.revature.wedding_planner.models.Wedding;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public class UserDAO implements CrudDAO<User>{
 
+//	static Logger logger;
+	
 	@Override
 	public User create(User newUser) {
 		try {
@@ -30,6 +32,7 @@ public class UserDAO implements CrudDAO<User>{
 			return newUser;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
+//			logger.log(Level.FINEST, "Exception thrown while creating user", e);
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -119,11 +122,10 @@ public class UserDAO implements CrudDAO<User>{
 	
 	
 	//added int overload to test with serial generated int id type
-	public boolean delete(int id) {
+	public boolean delete(User deletedUser) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			User deletedUser = this.findById(id);
 			session.delete(deletedUser);
 			transaction.commit();
 			return true;
