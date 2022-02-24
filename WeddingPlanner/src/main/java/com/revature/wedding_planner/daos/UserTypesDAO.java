@@ -97,11 +97,10 @@ public class UserTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public boolean delete(int id) {
+	public boolean delete(UserTypes deletedUserType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			UserTypes deletedUserType = this.findById(id);
 			session.delete(deletedUserType);
 			transaction.commit();
 			return true;

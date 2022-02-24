@@ -122,11 +122,10 @@ public class UserDAO implements CrudDAO<User>{
 	
 	
 	//added int overload to test with serial generated int id type
-	public boolean delete(int id) {
+	public boolean delete(User deletedUser) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			User deletedUser = this.findById(id);
 			session.delete(deletedUser);
 			transaction.commit();
 			return true;

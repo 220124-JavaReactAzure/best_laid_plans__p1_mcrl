@@ -30,6 +30,9 @@ public class UserTypesService {
 	}
 
 	public UserTypes updateUserType(UserTypes updatedUserType) {
+		if (!isValidUserType(updatedUserType)) {
+			throw new InvalidRequestException("Invalid userType data provided");
+		}
 		if (!userTypesDAO.update(updatedUserType)) {
 			throw new ResourcePersistenceException("Failure updating userType.");
 		}
@@ -57,8 +60,8 @@ public class UserTypesService {
 		}
 	}
 
-	public void deleteUserType(UserTypes userType) {
-		userTypesDAO.delete(userType.getId());
+	public boolean deleteUserType(UserTypes userType) {
+		return userTypesDAO.delete(userType);
 	}
 
 	private boolean isValidUserType(UserTypes userType) {
