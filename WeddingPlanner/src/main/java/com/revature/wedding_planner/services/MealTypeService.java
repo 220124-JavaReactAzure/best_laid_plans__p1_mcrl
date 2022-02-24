@@ -2,25 +2,25 @@ package com.revature.wedding_planner.services;
 
 import java.util.List;
 
-import com.revature.wedding_planner.daos.MealTypesDAO;
+import com.revature.wedding_planner.daos.MealTypeDAO;
 import com.revature.wedding_planner.exceptions.InvalidRequestException;
 import com.revature.wedding_planner.exceptions.ResourcePersistenceException;
-import com.revature.wedding_planner.models.MealTypes;
+import com.revature.wedding_planner.models.MealType;
 
 
-public class MealTypesService {
-	private final MealTypesDAO mealTypesDAO;
+public class MealTypeService {
+	private final MealTypeDAO mealTypesDAO;
 	
-	public MealTypesService(MealTypesDAO mealTypesDAO) {
+	public MealTypeService(MealTypeDAO mealTypesDAO) {
 		this.mealTypesDAO = mealTypesDAO;
 	}
 	
-	public boolean addMealType(MealTypes mealType) {
+	public boolean addMealType(MealType mealType) {
 		if(!isValidMealType(mealType)) {
 			throw new InvalidRequestException("Invalid mealType data provided");
 		}
 		
-		MealTypes persistedMealType = mealTypesDAO.create(mealType);
+		MealType persistedMealType = mealTypesDAO.create(mealType);
 		
 		if (persistedMealType == null) {
 			throw new ResourcePersistenceException("The mealType could not be persisted");
@@ -29,7 +29,7 @@ public class MealTypesService {
 		return true;
 	}
 	
-	public MealTypes updateMealType(MealTypes updatedMealType) {
+	public MealType updateMealType(MealType updatedMealType) {
 		if(!isValidMealType(updatedMealType)) {
 			throw new InvalidRequestException("Invalid mealType data provided");
 		}
@@ -38,9 +38,9 @@ public class MealTypesService {
 		}
 		return updatedMealType;
 	}
-	public MealTypes getMealTypeByID(int mealTypeId) {
+	public MealType getMealTypeByID(int mealTypeId) {
 
-		MealTypes foundMealType = mealTypesDAO.findById(mealTypeId);
+		MealType foundMealType = mealTypesDAO.findById(mealTypeId);
 
 		if (foundMealType != null) {
 			return foundMealType;
@@ -49,8 +49,8 @@ public class MealTypesService {
 		}
 	}
 
-	public List<MealTypes> getAllMealTypes() {
-		List<MealTypes> allMealTypes = mealTypesDAO.findAll();
+	public List<MealType> getAllMealTypes() {
+		List<MealType> allMealTypes = mealTypesDAO.findAll();
 		
 		if (allMealTypes == null) {
 			return null;
@@ -59,10 +59,10 @@ public class MealTypesService {
 		}
 	}
 	
-	public boolean deleteMealType(MealTypes mealType) {
+	public boolean deleteMealType(MealType mealType) {
 		return mealTypesDAO.delete(mealType);
 	}
-	public boolean isValidMealType(MealTypes mealType) {
+	public boolean isValidMealType(MealType mealType) {
 		// TODO expand validity checking
 		if(mealType != null) {
 			return true;

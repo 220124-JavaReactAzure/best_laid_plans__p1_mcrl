@@ -41,7 +41,7 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "meal_choice")
 	@JsonIgnoreProperties(value= {"users", "id"})
-	public MealTypes mealChoice;
+	public MealType mealChoice;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "wedding_id")
@@ -52,7 +52,7 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_type")
 	@JsonIgnoreProperties(value= {"users", "id"})
-	public UserTypes userType;
+	public UserType userType;
 
 	public User() {
 		super();
@@ -66,7 +66,7 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String name, String email, String username, String password, UserTypes userType) {
+	public User(String name, String email, String username, String password, UserType userType) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -75,7 +75,7 @@ public class User {
 		this.userType = userType;
 	}
 
-	public User(int id, String name, String email, String username, String password, UserTypes userType) {
+	public User(int id, String name, String email, String username, String password, UserType userType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -85,8 +85,8 @@ public class User {
 		this.userType = userType;
 	}
 
-	public User(int id, String name, String email, String username, String password, MealTypes mealChoice,
-			boolean plusOne, boolean attending, UserTypes userType, Wedding wedding) {
+	public User(int id, String name, String email, String username, String password, MealType mealChoice,
+			boolean plusOne, boolean attending, UserType userType, Wedding wedding) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -140,11 +140,11 @@ public class User {
 		this.password = password;
 	}
 
-	public MealTypes getMealChoice() {
+	public MealType getMealChoice() {
 		return mealChoice;
 	}
 
-	public void setMealChoice(MealTypes mealChoice) {
+	public void setMealChoice(MealType mealChoice) {
 		this.mealChoice = mealChoice;
 	}
 
@@ -164,11 +164,11 @@ public class User {
 		this.attending = attending;
 	}
 
-	public UserTypes getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(UserTypes userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
 

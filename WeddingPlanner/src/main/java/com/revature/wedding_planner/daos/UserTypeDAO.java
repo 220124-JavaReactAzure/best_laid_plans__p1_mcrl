@@ -9,14 +9,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.wedding_planner.models.UserTypes;
+import com.revature.wedding_planner.models.UserType;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class UserTypesDAO {
+public class UserTypeDAO {
 	 
 //	static Logger logger;
 	
-	public UserTypes create(UserTypes newUserType) {
+	public UserType create(UserType newUserType) {
 		try {
 			Session session = HibernateUtil.getSession();			
 			
@@ -36,10 +36,10 @@ public class UserTypesDAO {
 		}
 	}
 	
-	public List<UserTypes> findAll() {
+	public List<UserType> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
-			List<UserTypes> userTypes = session.createQuery("FROM UserTypes").list();
+			List<UserType> userTypes = session.createQuery("FROM UserTypes").list();
 			return userTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -51,10 +51,10 @@ public class UserTypesDAO {
 		}
 	}
 	
-	public UserTypes findById(int id) {
+	public UserType findById(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
-			UserTypes foundUserType = session.get(UserTypes.class, id); 
+			UserType foundUserType = session.get(UserType.class, id); 
 			return foundUserType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -64,13 +64,13 @@ public class UserTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public UserTypes findByUserType(String userType) {
+	public UserType findByUserType(String userType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
 			Query query = session.createQuery("SELECT FROM UserTypes WHERE UserTypes.userType = :userType ");
 			query.setParameter("userType", userType);
-			UserTypes foundUserType =  (UserTypes) query.getSingleResult();
+			UserType foundUserType =  (UserType) query.getSingleResult();
 			transaction.commit();
 			return foundUserType;
 		} catch (HibernateException | IOException e) {
@@ -81,7 +81,7 @@ public class UserTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}	
-	public boolean update(UserTypes updatedUserType) {
+	public boolean update(UserType updatedUserType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			// Updates and Deletes always start with a transaction and end with a commit
@@ -97,7 +97,7 @@ public class UserTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public boolean delete(UserTypes deletedUserType) {
+	public boolean delete(UserType deletedUserType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();

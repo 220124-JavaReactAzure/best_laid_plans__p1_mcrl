@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.wedding_planner.models.UserTypes;
-import com.revature.wedding_planner.services.UserTypesService;
+import com.revature.wedding_planner.models.MealType;
+import com.revature.wedding_planner.services.MealTypeService;
 
-public class UserTypesServlet extends HttpServlet{
+public class MealTypeServlet extends HttpServlet {
 
-	private final UserTypesService userTypesService;
+	private final MealTypeService mealTypesService;
 	private final ObjectMapper mapper;
 
-	public UserTypesServlet(UserTypesService userTypesService, ObjectMapper mapper) {
+	public MealTypeServlet(MealTypeService mealTypesService, ObjectMapper mapper) {
 		super();
-		this.userTypesService = userTypesService;
+		this.mealTypesService = mealTypesService;
 		this.mapper = mapper;
 	}
 
@@ -31,8 +31,8 @@ public class UserTypesServlet extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 
 		try {
-			List<UserTypes> userTypes = userTypesService.getAllUserTypes();
-			String payload = mapper.writeValueAsString(userTypes);
+			List<MealType> mealTypes = mealTypesService.getAllMealTypes();
+			String payload = mapper.writeValueAsString(mealTypes);
 			writer.write(payload);
 			resp.setStatus(200);
 		} catch (StreamReadException | DatabindException e) {
@@ -44,13 +44,13 @@ public class UserTypesServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
 		try {
-			UserTypes newUserType = mapper.readValue(req.getInputStream(), UserTypes.class);
-			boolean wasReg = userTypesService.addUserType(newUserType);
+			MealType newMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			boolean wasReg = mealTypesService.addMealType(newMealType);
 			if (wasReg) {
 				resp.setStatus(201);
 			} else {
 				resp.setStatus(500);
-				resp.getWriter().write("Database did not persist new userType.");
+				resp.getWriter().write("Database did not persist new mealType.");
 			}
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -58,7 +58,7 @@ public class UserTypesServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist userType.");
+			resp.getWriter().write("Some other random exception--did not persist mealType.");
 			e.printStackTrace();
 		}
 	}
@@ -66,8 +66,8 @@ public class UserTypesServlet extends HttpServlet{
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			UserTypes updatedUserType = mapper.readValue(req.getInputStream(), UserTypes.class);
-			userTypesService.updateUserType(updatedUserType);
+			MealType updatedMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			mealTypesService.updateMealType(updatedMealType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -75,7 +75,7 @@ public class UserTypesServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist userType update.");
+			resp.getWriter().write("Some other random exception--did not persist mealType update.");
 			e.printStackTrace();
 		}
 	}
@@ -83,8 +83,8 @@ public class UserTypesServlet extends HttpServlet{
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			UserTypes deletedUserType = mapper.readValue(req.getInputStream(), UserTypes.class);
-			userTypesService.deleteUserType(deletedUserType);
+			MealType deletedMealType = mapper.readValue(req.getInputStream(), MealType.class);
+			mealTypesService.deleteMealType(deletedMealType);
 			resp.setStatus(204);
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
@@ -92,8 +92,9 @@ public class UserTypesServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
-			resp.getWriter().write("Some other random exception--did not persist userType deletion.");
+			resp.getWriter().write("Some other random exception--did not persist mealType deletion.");
 			e.printStackTrace();
 		}
 	}
+
 }

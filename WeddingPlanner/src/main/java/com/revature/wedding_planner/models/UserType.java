@@ -17,41 +17,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="meal_types")
+@Table(name="user_types")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class MealTypes {
+public class UserType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="meal_type_id")
+	@Column(name="user_type_id")
 	private int id;
 	
-	@Column(name = "meal_type", unique = true, nullable = false)
-	private String mealType;
+	//try without columnDefinition and/or check azure column definition syntax
+	@Column(name = "user_type", unique = true, nullable = false)
+	private String userType;
 	
-
-	@OneToMany(mappedBy="mealChoice", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="mealChoice")
+	@OneToMany(mappedBy="userType", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties(value="userType")
 	private List<User> users;
 	
-	public MealTypes() {
+	public UserType() {
 		super();
 	}
 
-	public MealTypes(String mealType) {
+	public UserType(String userType) {
 		super();
-		this.mealType = mealType;
+		this.userType = userType;
 	}
 
-	public MealTypes(int id, String mealType) {
+	public UserType(String userType, List<User> users) {
+		super();
+		this.userType = userType;
+		this.users = users;
+	}
+
+	public UserType(int id, String userType, List<User> users) {
 		super();
 		this.id = id;
-		this.mealType = mealType;
-	}
-
-	public MealTypes(int id, String mealType, List<User> users) {
-		super();
-		this.id = id;
-		this.mealType = mealType;
+		this.userType = userType;
 		this.users = users;
 	}
 
@@ -63,12 +63,12 @@ public class MealTypes {
 		this.id = id;
 	}
 
-	public String getMealType() {
-		return mealType;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setMealType(String mealType) {
-		this.mealType = mealType;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public List<User> getUsers() {
@@ -81,12 +81,12 @@ public class MealTypes {
 
 	@Override
 	public String toString() {
-		return "[mealType=" + mealType + "]";
+		return "UserTypes [userType=" + userType + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, mealType, users);
+		return Objects.hash(id, userType, users);
 	}
 
 	@Override
@@ -97,9 +97,12 @@ public class MealTypes {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MealTypes other = (MealTypes) obj;
-		return id == other.id && Objects.equals(mealType, other.mealType) && Objects.equals(users, other.users);
+		UserType other = (UserType) obj;
+		return Objects.equals(id, other.id) && Objects.equals(userType, other.userType)
+				&& Objects.equals(users, other.users);
 	}
+
+	
 	
 	
 }

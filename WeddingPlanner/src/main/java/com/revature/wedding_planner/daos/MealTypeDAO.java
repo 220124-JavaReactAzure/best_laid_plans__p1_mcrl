@@ -12,14 +12,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.wedding_planner.models.MealTypes;
+import com.revature.wedding_planner.models.MealType;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class MealTypesDAO {
+public class MealTypeDAO {
 	
 //	static Logger logger;
 	
-	public MealTypes create(MealTypes newMealType) {
+	public MealType create(MealType newMealType) {
 		try {
 			Session session = HibernateUtil.getSession();			
 			
@@ -39,10 +39,10 @@ public class MealTypesDAO {
 		}
 	}
 	
-	public List<MealTypes> findAll() {
+	public List<MealType> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
-			List<MealTypes> mealTypes = session.createQuery("FROM MealTypes").list();
+			List<MealType> mealTypes = session.createQuery("FROM MealTypes").list();
 			return mealTypes;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -54,10 +54,10 @@ public class MealTypesDAO {
 		}
 	}
 	
-	public MealTypes findById(int id) {
+	public MealType findById(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
-			MealTypes foundMealType = session.get(MealTypes.class, id); 
+			MealType foundMealType = session.get(MealType.class, id); 
 			return foundMealType;
 		} catch (HibernateException | IOException e) {
 			//TODO implement logging
@@ -67,13 +67,13 @@ public class MealTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public MealTypes findByMealType(String mealType) {
+	public MealType findByMealType(String mealType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
 			Query query = session.createQuery("SELECT FROM MealTypes WHERE MealTypes.mealType = :mealType ");
 			query.setParameter("mealType", mealType);
-			MealTypes foundMealType =  (MealTypes) query.getSingleResult();
+			MealType foundMealType =  (MealType) query.getSingleResult();
 			transaction.commit();
 			return foundMealType;
 		} catch (HibernateException | IOException e) {
@@ -84,7 +84,7 @@ public class MealTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}	
-	public boolean update(MealTypes updatedMealType) {
+	public boolean update(MealType updatedMealType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			// Updates and Deletes always start with a transaction and end with a commit
@@ -100,7 +100,7 @@ public class MealTypesDAO {
 			HibernateUtil.closeSession();
 		}
 	}
-	public boolean delete(MealTypes deletedMealType) {
+	public boolean delete(MealType deletedMealType) {
 		try {
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();

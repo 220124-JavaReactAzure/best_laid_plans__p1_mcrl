@@ -2,25 +2,25 @@ package com.revature.wedding_planner.services;
 
 import java.util.List;
 
-import com.revature.wedding_planner.daos.UserTypesDAO;
+import com.revature.wedding_planner.daos.UserTypeDAO;
 import com.revature.wedding_planner.exceptions.InvalidRequestException;
 import com.revature.wedding_planner.exceptions.ResourcePersistenceException;
-import com.revature.wedding_planner.models.UserTypes;
+import com.revature.wedding_planner.models.UserType;
 
-public class UserTypesService {
+public class UserTypeService {
 
-	private final UserTypesDAO userTypesDAO;
+	private final UserTypeDAO userTypesDAO;
 
-	public UserTypesService(UserTypesDAO userTypesDAO) {
+	public UserTypeService(UserTypeDAO userTypesDAO) {
 		this.userTypesDAO = userTypesDAO;
 	}
 
-	public boolean addUserType(UserTypes userType) {
+	public boolean addUserType(UserType userType) {
 		if (!isValidUserType(userType)) {
 			throw new InvalidRequestException("Invalid userType data provided");
 		}
 
-		UserTypes persistedUserType = userTypesDAO.create(userType);
+		UserType persistedUserType = userTypesDAO.create(userType);
 
 		if (persistedUserType == null) {
 			throw new ResourcePersistenceException("The userType could not be persisted");
@@ -29,7 +29,7 @@ public class UserTypesService {
 		return true;
 	}
 
-	public UserTypes updateUserType(UserTypes updatedUserType) {
+	public UserType updateUserType(UserType updatedUserType) {
 		if (!isValidUserType(updatedUserType)) {
 			throw new InvalidRequestException("Invalid userType data provided");
 		}
@@ -39,9 +39,9 @@ public class UserTypesService {
 		return updatedUserType;
 	}
 
-	public UserTypes getUserTypeByID(int userTypeId) {
+	public UserType getUserTypeByID(int userTypeId) {
 
-		UserTypes foundUserType = userTypesDAO.findById(userTypeId);
+		UserType foundUserType = userTypesDAO.findById(userTypeId);
 
 		if (foundUserType != null) {
 			return foundUserType;
@@ -50,8 +50,8 @@ public class UserTypesService {
 		}
 	}
 
-	public List<UserTypes> getAllUserTypes() {
-		List<UserTypes> allUserTypes = userTypesDAO.findAll();
+	public List<UserType> getAllUserTypes() {
+		List<UserType> allUserTypes = userTypesDAO.findAll();
 
 		if (allUserTypes == null) {
 			return null;
@@ -60,11 +60,11 @@ public class UserTypesService {
 		}
 	}
 
-	public boolean deleteUserType(UserTypes userType) {
+	public boolean deleteUserType(UserType userType) {
 		return userTypesDAO.delete(userType);
 	}
 
-	private boolean isValidUserType(UserTypes userType) {
+	public boolean isValidUserType(UserType userType) {
 		// TODO expand validity checking
 		if (userType != null) {
 			return true;
