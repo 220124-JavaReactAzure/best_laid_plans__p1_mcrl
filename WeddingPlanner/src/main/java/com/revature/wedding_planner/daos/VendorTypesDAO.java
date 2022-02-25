@@ -14,6 +14,7 @@ import com.revature.wedding_planner.models.VendorType;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
 public  class VendorTypesDAO{
+
 	public VendorType create(VendorType newVendorType) {
 		try {
 			Session session = HibernateUtil.getSession();			
@@ -32,7 +33,6 @@ public  class VendorTypesDAO{
 			HibernateUtil.closeSession();
 		}
 	}
-
 
 	public List<VendorType> findAll() {
 		try {
@@ -79,6 +79,7 @@ public  class VendorTypesDAO{
 			HibernateUtil.closeSession();
 		}
 	}
+
 	public boolean update(VendorType updatedVendorType) {
 		try {
 			Session session = HibernateUtil.getSession();

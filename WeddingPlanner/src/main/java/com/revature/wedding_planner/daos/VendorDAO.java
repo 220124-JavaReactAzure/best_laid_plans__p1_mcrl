@@ -35,8 +35,6 @@ public  class VendorDAO {
 		}
 	}
 
-
-
 	public List<Vendor> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -82,6 +80,7 @@ public  class VendorDAO {
 			HibernateUtil.closeSession();
 		}
 	}
+
 	public boolean update(Vendor updatedVendor) {
 		try {
 			Session session = HibernateUtil.getSession();
