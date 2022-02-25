@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="vendor_types")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "vendTypeId")
 public class VendorType {
 	
 
@@ -30,8 +30,8 @@ public class VendorType {
 	@Column(name="vendor_type")
 	private String vendorType;
 	
-	@OneToMany(mappedBy="users", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties(value="user")
+	@OneToMany(mappedBy="vendortype", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties(value="vendortype")
 	private List<Vendor> vendors;
 	
 	public VendorType() {

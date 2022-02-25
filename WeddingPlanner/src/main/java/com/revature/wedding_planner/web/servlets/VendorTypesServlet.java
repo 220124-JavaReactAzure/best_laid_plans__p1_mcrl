@@ -31,10 +31,10 @@ public class VendorTypesServlet extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 
 		try {
-			List<VendorType> vendorTypes = VendorTypesService.getAllVendorTypes();
+			List<VendorType> vendorTypes = vendorTypesService.getAllVendorTypes();
 			String payload = "";
 			for (VendorType vendorType: vendorTypes) {
-				payload += mapper.writeValueAsString(vendorType.getVendorType()) + "\n";
+				payload += mapper.writeValueAsString(vendorType) + "\n";
 			}
 			
 			writer.write(payload);
