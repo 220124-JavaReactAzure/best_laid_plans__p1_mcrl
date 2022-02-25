@@ -33,7 +33,7 @@ public class VendorServlet extends HttpServlet {
 			List<Vendor> vendors = vendorService.getAllVendors();
 			String payload = "";
 			for (Vendor vendor: vendors) {
-				payload += mapper.writeValueAsString(vendor.getName()) + "\n";
+				payload += mapper.writeValueAsString(vendor) + "\n";
 			}
 			
 			writer.write(payload);

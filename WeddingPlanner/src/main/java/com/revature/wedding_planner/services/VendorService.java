@@ -87,6 +87,6 @@ public class VendorService {
 	}
 	
 	public void deleteVendor(Vendor vendor) {
-		vendorDAO.delete(vendor.getId());
+		vendorDAO.delete(vendor.getVendId());
 	}
 }
