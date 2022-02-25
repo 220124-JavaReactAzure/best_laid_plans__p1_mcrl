@@ -14,7 +14,8 @@ import org.hibernate.Transaction;
 import com.revature.wedding_planner.models.Vendor;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class VendorDAO {
+public  class VendorDAO {
+
 	public Vendor create(Vendor newVendor) {
 		try {
 			Session session = HibernateUtil.getSession();			
