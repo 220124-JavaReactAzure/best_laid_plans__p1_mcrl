@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +23,7 @@ public class MealTypeServlet extends HttpServlet {
 
 	private final MealTypeService mealTypesService;
 	private final ObjectMapper mapper;
+	private static final Logger logger = LogManager.getLogger(MealTypeServlet.class);
 
 	public MealTypeServlet(MealTypeService mealTypesService, ObjectMapper mapper) {
 		super();
@@ -40,6 +45,7 @@ public class MealTypeServlet extends HttpServlet {
 			writer.write(payload);
 			resp.setStatus(200);
 		} catch (StreamReadException | DatabindException e) {
+			logger.log(Level.ALL,"Exception thrown while retrieving mealType(s)", e);
 			resp.setStatus(400);
 		}
 	}
@@ -59,11 +65,13 @@ public class MealTypeServlet extends HttpServlet {
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
 			resp.getWriter().write("JSON threw exception.");
-			e.printStackTrace();
+			logger.log(Level.DEBUG,"Exception thrown while persisting mealType(s)", e);
+//			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
 			resp.getWriter().write("Some other random exception--did not persist mealType.");
-			e.printStackTrace();
+			logger.log(Level.ALL,"Exception thrown while persisting mealType(s)", e);
+//			e.printStackTrace();
 		}
 	}
 
@@ -80,7 +88,8 @@ public class MealTypeServlet extends HttpServlet {
 		} catch (Exception e) {
 			resp.setStatus(500);
 			resp.getWriter().write("Some other random exception--did not persist mealType update.");
-			e.printStackTrace();
+			logger.log(Level.ALL,"Exception thrown while updating mealType(s)", e);
+//			e.printStackTrace();
 		}
 	}
 
@@ -93,11 +102,14 @@ public class MealTypeServlet extends HttpServlet {
 		} catch (StreamReadException | DatabindException e) {
 			resp.setStatus(400);
 			resp.getWriter().write("JSON threw exception");
-			e.printStackTrace();
+			logger.log(Level.DEBUG,"Exception thrown while deleting mealType(s)", e);
+//			e.printStackTrace();
 		} catch (Exception e) {
 			resp.setStatus(500);
 			resp.getWriter().write("Some other random exception--did not persist mealType deletion.");
-			e.printStackTrace();
+			
+			logger.log(Level.ALL,"Exception thrown while deleting mealType(s)", e);
+//			e.printStackTrace();
 		}
 	}
 
