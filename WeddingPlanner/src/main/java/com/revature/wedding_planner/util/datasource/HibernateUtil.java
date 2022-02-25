@@ -14,6 +14,7 @@ import com.revature.wedding_planner.models.MealType;
 import com.revature.wedding_planner.models.User;
 import com.revature.wedding_planner.models.UserType;
 import com.revature.wedding_planner.models.Vendor;
+import com.revature.wedding_planner.models.VendorType;
 import com.revature.wedding_planner.models.Wedding;
 
 
@@ -32,11 +33,11 @@ public class HibernateUtil {
 			configuration.setProperties(props);
 
 			configuration.addAnnotatedClass(User.class);
-//			configuration.addAnnotatedClass(Vendor.class);
+		configuration.addAnnotatedClass(Vendor.class);
 			configuration.addAnnotatedClass(Wedding.class);
 			configuration.addAnnotatedClass(MealType.class);
 			configuration.addAnnotatedClass(UserType.class);
-//			configuration.addAnnotatedClass(VendorType.class);
+		configuration.addAnnotatedClass(VendorType.class);
 	
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 			

@@ -76,7 +76,7 @@ public class VendorTypesService {
 				return null;
 			}
 		}
-		public List<VendorType> getAllVendorTypes() {
+		public static List<VendorType> getAllVendorTypes() {
 			List<VendorType> allVendorTypes = vendorTypesDAO.findAll();
 			
 			if (allVendorTypes == null) {

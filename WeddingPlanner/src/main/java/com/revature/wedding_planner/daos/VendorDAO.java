@@ -14,8 +14,8 @@ import org.hibernate.Transaction;
 import com.revature.wedding_planner.models.Vendor;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public abstract class VendorDAO implements CrudDAO<Vendor>{
-	@Override
+public  class VendorDAO {
+
 	public Vendor create(Vendor newVendor) {
 		try {
 			Session session = HibernateUtil.getSession();			
@@ -36,7 +36,7 @@ public abstract class VendorDAO implements CrudDAO<Vendor>{
 	}
 
 
-	@Override
+
 	public List<Vendor> findAll() {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -51,7 +51,6 @@ public abstract class VendorDAO implements CrudDAO<Vendor>{
 		}
 	}
 
-	@Override
 	public Vendor findById(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -83,7 +82,6 @@ public abstract class VendorDAO implements CrudDAO<Vendor>{
 			HibernateUtil.closeSession();
 		}
 	}
-	@Override
 	public boolean update(Vendor updatedVendor) {
 		try {
 			Session session = HibernateUtil.getSession();
@@ -101,7 +99,6 @@ public abstract class VendorDAO implements CrudDAO<Vendor>{
 		}
 	}
 
-	@Override
 	public boolean delete(int id) {
 		try {
 			Session session = HibernateUtil.getSession();
