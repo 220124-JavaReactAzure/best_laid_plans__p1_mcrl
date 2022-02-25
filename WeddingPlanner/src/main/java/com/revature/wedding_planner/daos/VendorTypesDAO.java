@@ -13,7 +13,7 @@ import com.revature.wedding_planner.models.Vendor;
 import com.revature.wedding_planner.models.VendorType;
 import com.revature.wedding_planner.util.datasource.HibernateUtil;
 
-public class VendorTypesDAO{
+public  class VendorTypesDAO{
 
 	public VendorType create(VendorType newVendorType) {
 		try {
