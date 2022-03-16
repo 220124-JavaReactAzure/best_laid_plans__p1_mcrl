@@ -10,6 +10,8 @@ Best Laid Plans Wedding Planner app was developed for a small wedding planning c
 - Hibernate & JPA
 - Azure SQL
 - Tomcat
+- Mockito
+- Log4J
 
 ## Features
 ### As a Betrothed I can:
